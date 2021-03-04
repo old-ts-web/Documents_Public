@@ -1,0 +1,19 @@
+@startuml
+
+actor 遊戲Server
+database 遊戲DB
+database 網頁DB
+entity 網頁工具
+actor 查緝及運營
+
+遊戲Server <- 遊戲DB: <b><font color=green>[遊戲端流程]</font></b>\n讀取標籤\nSELECT\t*\nFROM\t[dbo].[MEMBER_GetLabelList] (@MEMBER_NO)
+遊戲Server -> 遊戲DB: <b><font color=green>[遊戲端流程]</font></b>\n貼標籤\nEXEC\t[dbo].[MEMBER_AddLabel] @MEMBER_NO, @LABEL_NO
+遊戲Server -> 遊戲DB: <b><font color=green>[遊戲端流程]</font></b>\n刪標籤\nEXEC\t[dbo].[MEMBER_RemoveLabel] @MEMBER_NO, @LABEL_NO
+
+遊戲DB ->x 網頁DB: <b><font color=blue>[網頁端流程]</font></b>\n網頁排程定期同步遊戲有異動的標籤\n<font color=red>因明星有可能對所有玩家貼預設標籤，</font>\n<font color=red>導致標籤量過大，終止本段處理</font>\n<font color=green>另做工具讓運營查緝可查遊戲 DB 標籤</font>\n
+
+查緝及運營 -> 網頁工具: <b><font color=blue>[網頁端流程]</font></b>\n操作貼標、除標
+網頁工具 -> 網頁DB: <b><font color=blue>[網頁端流程]</font></b>\n更新網頁DB
+網頁工具 -> 遊戲DB: <b><font color=blue>[網頁端流程]</font></b>\n更新遊戲DB
+
+@enduml
