@@ -6,17 +6,17 @@
 
 此時登入介面會出現 IGS logo 的登入選項
 
-![image-20210310143759272](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310143759272.png)
+![](images\media2\image8.png)
 
 點擊後輸入內網帳密
 
-![image-20210310143842775](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310143842775.png)
+![](images\media2\image9.png)
 
 2\. 成功登入後會自動用內網帳密註冊後端工具帳號並進入工具首頁
 
 新註冊的帳號需點選左上角「後端首頁」→「權限申請」開通相關權限
 
-![image-20210310144256311](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310144256311.png)
+![](images\media2\image10.png)
 
 3\. 權限申請會導向「網頁案件管理系統」填寫gametower後端權限申請需求
 
@@ -49,4 +49,4 @@ e.g.
 2.問題回報紀錄查詢
 ```
 
-![image-20210310145440475](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310145440475.png)
+![](images\media2\image11.png)``
