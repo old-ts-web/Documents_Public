@@ -1,53 +1,52 @@
 # gametower後端工具權限申請說明
 
-1\. 請先至gametower網站註冊gametower帳號：
+1\. 連結到後端工具：
 
-<https://www.gametower.com.tw/member/register.aspx>
+<https://admin.gametower.com.tw/common/Admin/index.aspx>
 
-![](images\media2\image1.png){width="4.65625in"
-height="2.7604166666666665in"}
+此時登入介面會出現 IGS logo 的登入選項
 
-「E-mail電子信箱」欄位請填寫公司信箱，例如：somebody\@igs.com.tw
+![image-20210310143759272](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310143759272.png)
 
-2\. 接著登入gametower網站並昇級成為標準會員補填真實姓名：
+點擊後輸入內網帳密
 
-<https://www.gametower.com.tw/Member/index.aspx>
+![image-20210310143842775](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310143842775.png)
 
-![](images\media2\image2.png){width="4.65625in" height="1.65625in"}
+2\. 成功登入後會自動用內網帳密註冊後端工具帳號並進入工具首頁
 
-![](images\media2\image3.png){width="4.666666666666667in"
-height="3.1145833333333335in"}
+新註冊的帳號需點選左上角「後端首頁」→「權限申請」開通相關權限
 
-「真實姓名」欄位請填寫真實姓名，請勿填寫綽號暱稱
+![image-20210310144256311](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310144256311.png)
 
-3\. 接著至「網頁案件管理系統」填寫gametower後端權限申請需求：
-
-<http://www.webcase.web/index.aspx>
-
-![](images\media2\image4.png){width="5.541666666666667in"
-height="1.3125in"}
-
-![](images\media2\image5.png){width="3.0416666666666665in"
-height="2.7291666666666665in"}
+3\. 權限申請會導向「網頁案件管理系統」填寫gametower後端權限申請需求
 
 「登入模式」請選擇「鈊象內部資訊網帳號」
 
 首次登入的話「分機號碼」請務必填寫
 
+![](images\media2\image5.png){width="3.0416666666666665in"
+height="2.7291666666666665in"}
+
+「案件類別」選擇所屬專案
+
+「案件名稱」填寫「申請gametower後端工具權限」
+
 ![](images\media2\image6.png){width="5.041666666666667in"
 height="4.947916666666667in"}
 
-「案件名稱」可填寫「申請gametower後端工具權限」
+「備註說明」詳細填寫權限需求，內容範例
 
-![](images\media2\image7.png){width="6.541666666666667in"
-height="1.5729166666666667in"}
+```
+IGS鈊象電子內部資訊網帳號：輸入內網帳號 ( 姓名 )
+gametower帳號：輸入後端工具右上角顯示帳號 ( 姓名 )
+申請以下權限：
+(請選擇案件類別/專案) - XX人員
 
-「備註說明」詳細填寫權限需求，例如：
-
-gametower帳號：someone (李春嬌)
-
-申請以下工具權限：
-
+e.g.
+明星3缺1 - 運營人員
+e.g.
 1.儲值中心交易紀錄查詢
-
 2.問題回報紀錄查詢
+```
+
+![image-20210310145440475](C:\Users\zhuchiehlin\AppData\Roaming\Typora\typora-user-images\image-20210310145440475.png)
