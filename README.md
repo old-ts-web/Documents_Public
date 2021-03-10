@@ -26,4 +26,4 @@
 
 ## MD檔案編輯方法
 
-建議可以安裝Typora進行編輯，使用說明請參考 [[Typora安裝與設定](http://git.towergame.com:8080/OLD_TS_WEB/Documents_Public/src/branch/master/%e4%bd%bf%e7%94%a8Typora%e7%b7%a8%e8%bc%afMD%e6%96%87%e4%bb%b6%e6%89%8b%e9%a0%86%e6%9b%b8.md)] 文件
+建議可以安裝Typora進行編輯，使用說明請參考 [[Typora安裝與設定](http://git.towergame.com:8080/OLD_TS_WEB/Documents_Public/src/branch/master/%e6%8a%80%e8%a1%93%e6%96%87%e4%bb%b6/%e4%bd%bf%e7%94%a8Typora%e7%b7%a8%e8%bc%afMD%e6%96%87%e4%bb%b6%e6%89%8b%e9%a0%86%e6%9b%b8/%e4%bd%bf%e7%94%a8Typora%e7%b7%a8%e8%bc%afMD%e6%96%87%e4%bb%b6%e6%89%8b%e9%a0%86%e6%9b%b8.md)] 文件
