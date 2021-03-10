@@ -7,7 +7,8 @@
 | **1.0**    | 2015/10/16  | 魏嘉男 | 新建立文件                    |
 | (略)       |            |        |                                                              |
 | **1.44.0** | 2021/01/04  | 林子傑 | 新增六十、儲值黑名單上限API   |
-| **1.45.0** | 2021/03/02  | 謝昇富 | 1\.修改十、取得是否已進行過手機撥號或手機簡訊認證(新增會員帳號)<br>2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |(新增滿貫大亨_防盜手機驗證碼) |
+| **1.45.0** | 2021/03/02  | 謝昇富 | 1\.修改十、取得是否已進行過手機撥號或手機簡訊認證(新增會員帳號)<br>2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
+| **1.46.0** | 2021/03/10 | 林子傑 | 新增六十一、取得和設定會員資料API |
 
 ## 1.說明
 
@@ -5079,3 +5080,88 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
  "RESULT": null
 }
 ```
+
+## 61.取得和設定會員資料 API
+
+網址
+
+開發：http://admin.gt.web/common/receive/Member/GetOrSetMemberData.aspx
+
+測試：https://admin-twtest.towergame.com/common/receive/Member/GetOrSetMemberData.aspx
+
+正式：https://admin.gametower.com.tw/common/receive/Member/GetOrSetMemberData.aspx
+
+> 功能描述
+>
+> 可取得和設定會員資料(例如：生日)，呼叫來源 IP 需在白名單
+
+傳遞參數方式：
+
+| Request Header |             |
+| -------------- | ----------- |
+| HTTP Method    | GET 或 POST |
+
+
+
+需要參數：
+
+| 參數名稱 | 規格   | 是否必填               | 描述                                                         |
+| -------- | ------ | ---------------------- | ------------------------------------------------------------ |
+| Mode     | string | 是                     | 模式<br>目前支援模式<br>1. 取得生日：GET_BIRTHDAY<br>2. 設定生日：SET_BIRTHDAY |
+| MemberNo | int    | 是                     |                                                              |
+| Month    | int    | 模式 SET_BIRTHDAY 必填 | 要設定的生日 – 月份                                          |
+| Day      | int    | 模式 SET_BIRTHDAY 必填 | 要設定的生日 – 日                                            |
+
+
+
+回傳參數說明：
+
+| 值             | 說明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| RETURN_CODE    | 0：成功，其餘：失敗                                          |
+| RETURN_MESSAGE | 有錯誤時會有錯誤訊息                                         |
+| RESULT         | RETURN_CODE = 0 才會回傳，否則為nul<br><br>1.取得生日：GET_BIRTHDAY<br>回傳以下參數<br>"BIRTH_DAY"    生日(MM-dd)，沒有生日則為空字串<br>"BIRTH_DAY_MONTH" 生日(月)，沒有則為 0<br>"BIRTH_DAY_DAY"  生日(日)，沒有則為 0<br>"CAN_SET_BIRTHDAY" 是否可以修改生日 (true / false)<br><br>2.設定生日：SET_BIRTHDAY<br>無回傳 RESULT |
+
+
+
+回傳格式：
+
+取得生日：GET_BIRTHDAY 成功(有生日)
+
+```json
+{
+	"RETURN_CODE": 0,
+	"RETURN_MESSAGE": "成功",
+	"RESULT": {
+		"BIRTH_DAY": "12-11",
+		"BIRTH_DAY_MONTH": 12,
+		"BIRTH_DAY_DAY": 11,
+		"CAN_SET_BIRTHDAY": true
+	}
+}
+```
+
+取得生日：GET_BIRTHDAY 成功(無生日)
+
+```json
+{
+	"RETURN_CODE": 0,
+	"RETURN_MESSAGE": "成功",
+	"RESULT": {
+		"BIRTH_DAY": "",
+		"BIRTH_DAY_MONTH": 0,
+		"BIRTH_DAY_DAY": 0,
+		"CAN_SET_BIRTHDAY": true
+	}
+}
+```
+
+失敗範例
+
+```json
+{
+	"RETURN_CODE": -10,
+	"RETURN_MESSAGE": "需進行會員升級才可使用生日功能"
+}
+```
+
