@@ -6,17 +6,17 @@
 
 此時登入介面會出現 IGS logo 的登入選項
 
-![](images\media2\image8.png)
+![](images/media2/image8.png)
 
 點擊後輸入內網帳密
 
-![](images\media2\image9.png)
+![](images/media2/image9.png)
 
 2\. 成功登入後會自動用內網帳密註冊後端工具帳號並進入工具首頁
 
 新註冊的帳號需點選左上角「後端首頁」→「權限申請」開通相關權限
 
-![](images\media2\image10.png)
+![](images/media2/image10.png)
 
 3\. 權限申請會導向「網頁案件管理系統」填寫gametower後端權限申請需求
 
@@ -24,14 +24,14 @@
 
 首次登入的話「分機號碼」請務必填寫
 
-![](images\media2\image5.png){width="3.0416666666666665in"
+![](images/media2/image5.png){width="3.0416666666666665in"
 height="2.7291666666666665in"}
 
 「案件類別」選擇所屬專案
 
 「案件名稱」填寫「申請gametower後端工具權限」
 
-![](images\media2\image6.png){width="5.041666666666667in"
+![](images/media2/image6.png){width="5.041666666666667in"
 height="4.947916666666667in"}
 
 「備註說明」詳細填寫權限需求，內容範例
@@ -49,4 +49,4 @@ e.g.
 2.問題回報紀錄查詢
 ```
 
-![](images\media2\image11.png)
+![](images/media2/image11.png)

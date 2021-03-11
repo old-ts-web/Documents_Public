@@ -371,7 +371,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 會員存在回傳lc字串，可用於登入gametower網站或其他用途
 
-![](images\media\image2.png){width="5.7652777777777775in"
+![](images/media/image2.png){width="5.7652777777777775in"
 height="0.84375in"}
 
 若是回傳-99 代表伺服器忙碌中
@@ -421,7 +421,7 @@ height="0.84375in"}
 流程圖：
 
 ![Facebook (App 登入
-mode=1)](images\media\image3.png){width="7.478472222222222in"
+mode=1)](images/media/image3.png){width="7.478472222222222in"
 height="7.469444444444444in"}
 
 ## 6.填寫隨你玩暱稱API
@@ -2943,7 +2943,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 頁面顯示：
 
-![問題回報頁面](images\media\image4.jpeg){width="4.84375in"
+![問題回報頁面](images/media/image4.jpeg){width="4.84375in"
 height="2.4611111111111112in"}
 
 
@@ -3048,10 +3048,10 @@ ex.3}&q_strAppID=com.igs.big2&q_nMemberNo={傳入會員編號 ex.717248}
 
 **※可透過模擬工具(<https://www.gt.web/common/admin/Utility/ChoiceProduct/GetProducts.aspx>)去獲得要帶的參數為何?!**
 
-![](images\media\image5.png){width="7.478472222222222in"
+![](images/media/image5.png){width="7.478472222222222in"
 height="5.547916666666667in"}
 
-![](images\media\image6.png){width="7.478472222222222in"
+![](images/media/image6.png){width="7.478472222222222in"
 height="5.052083333333333in"}
 
 需要參數：
@@ -3331,7 +3331,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 流程圖：
 
 ![LINE Login (APP
-登入)](images\media\image7.png){width="7.478472222222222in"
+登入)](images/media/image7.png){width="7.478472222222222in"
 height="8.38263888888889in"}
 
 ## 43.APP模式註冊LINE介接帳號
@@ -3589,7 +3589,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 頁面顯示：
 
-![B%GB8OVDVS\$2UM%\`6D)D\$F7](images\media\image8.png){width="6.35625in"
+![B%GB8OVDVS\$2UM%\`6D)D\$F7](images/media/image8.png){width="6.35625in"
 height="2.2694444444444444in"}
 
 ## 46.『滿貫任務說明』頁面
@@ -3622,7 +3622,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 頁面顯示：
 
-![F73CGE\~NQB800U2F%BUOHNU](images\media\image9.png){width="4.069444444444445in"
+![F73CGE\~NQB800U2F%BUOHNU](images/media/image9.png){width="4.069444444444445in"
 height="3.990972222222222in"}
 
 
@@ -3639,7 +3639,7 @@ height="3.990972222222222in"}
 
 流程圖參考：
 
-![問卷API](images\media\image10.png){width="7.478472222222222in"
+![問卷API](images/media/image10.png){width="7.478472222222222in"
 height="3.2in"}
 
 傳遞參數方式：
@@ -3719,7 +3719,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 流程圖參考：
 
-![](images\media\image11.png){width="6.0in"
+![](images/media/image11.png){width="6.0in"
 height="2.417361111111111in"}
 
 傳遞參數方式：
@@ -3978,7 +3978,7 @@ f_strPlatformData = f_nPrizeType%3D1 (Urlencode後)
 
 頁面顯示：
 
-![](images\media\image12.png){width="7.486805555555556in"
+![](images/media/image12.png){width="7.486805555555556in"
 height="2.2958333333333334in"}
 
 
@@ -4069,12 +4069,12 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
     A.  **遊戲內範例**
 
-![](images\media\image13.png){width="4.661111111111111in"
+![](images/media/image13.png){width="4.661111111111111in"
 height="2.7041666666666666in"}
 
 B.  **網頁範例**
 
-![](images\media\image14.png){width="4.661111111111111in"
+![](images/media/image14.png){width="4.661111111111111in"
 height="3.990972222222222in"}
 
 
@@ -4178,19 +4178,19 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
     測試：<https://admin-twtest.towergame.com/common/admin/LINENotify/index.aspx>\
     正式：<https://admin.gametower.com.tw/common/admin/LINENotify/index.aspx>\
     (1) 登入gametower官方帳號：
-    ![](images\media\image15.png){width="2.009027777777778in"
+    ![](images/media/image15.png){width="2.009027777777778in"
     height="2.1041666666666665in"}
     (2) 登入LINE：
-    ![](images\media\image16.png){width="2.0694444444444446in"
+    ![](images/media/image16.png){width="2.0694444444444446in"
     height="2.04375in"}
     (3) 擇「1-no-1 chat with LINE Notify」或「透過1對1聊天接收LINE
     Notify的通知」
     (通常都是第一個選項)
-    ![](images\media\image17.png){width="2.661111111111111in"
-    height="2.24375in"}或![](images\media\image18.png){width="2.426388888888889in"
+    ![](images/media/image17.png){width="2.661111111111111in"
+    height="2.24375in"}或![](images/media/image18.png){width="2.426388888888889in"
     height="1.9041666666666666in"}
     (4) 完成gametower帳號與LINENotify綁定：
-    ![](images\media\image19.png){width="3.2in"
+    ![](images/media/image19.png){width="3.2in"
     height="1.2173611111111111in"}
 
 
@@ -4484,11 +4484,11 @@ mode=2 (記憶登入)類似記憶帳號功能 (不會到微信授權介面)
 流程圖：
 
 ![Wechat Login (APP
-登入)](images\media\image20.png){width="7.478472222222222in"
+登入)](images/media/image20.png){width="7.478472222222222in"
 height="8.782638888888888in"}
 
 ![WeChat Login (APP
-記憶登入)](images\media\image21.png){width="6.990972222222222in"
+記憶登入)](images/media/image21.png){width="6.990972222222222in"
 height="9.217361111111112in"}
 
 ##  56.Apple 登入串接
@@ -4612,7 +4612,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 流程圖：
 
 ![Apple Login (APP
-sdk登入)](images\media\image22.png){width="7.365277777777778in"
+sdk登入)](images/media/image22.png){width="7.365277777777778in"
 height="9.678472222222222in"}
 
 
@@ -4753,7 +4753,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 流程圖：
 
 ![Google Login (APP
-sdk登入)](images\media\image23.png){width="7.478472222222222in"
+sdk登入)](images/media/image23.png){width="7.478472222222222in"
 height="6.4in"}
 
 ## 58.流失會員推廣
