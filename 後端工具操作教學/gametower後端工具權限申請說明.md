@@ -49,4 +49,4 @@ e.g.
 2.問題回報紀錄查詢
 ```
 
-![](images\media2\image11.png)``
+![](images\media2\image11.png)
