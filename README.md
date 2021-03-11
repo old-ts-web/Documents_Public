@@ -1,4 +1,4 @@
-# 公開文件說明
+# 網頁組公開文件說明
 
 此文件由技術服務部網頁組提供
 
@@ -27,3 +27,7 @@
 ## MD檔案編輯方法
 
 建議可以安裝Typora進行編輯，使用說明請參考 [[Typora安裝與設定](http://git.towergame.com:8080/OLD_TS_WEB/Documents_Public/src/branch/master/%e6%8a%80%e8%a1%93%e6%96%87%e4%bb%b6/%e4%bd%bf%e7%94%a8Typora%e7%b7%a8%e8%bc%afMD%e6%96%87%e4%bb%b6%e6%89%8b%e9%a0%86%e6%9b%b8/%e4%bd%bf%e7%94%a8Typora%e7%b7%a8%e8%bc%afMD%e6%96%87%e4%bb%b6%e6%89%8b%e9%a0%86%e6%9b%b8.md)] 文件
+
+## Gitea合併請求操作方法
+
+請參考 [[Gitea合併請求操作手順書](http://git.towergame.com:8080/OLD_TS_WEB/Documents_Public/src/branch/master/%E6%8A%80%E8%A1%93%E6%96%87%E4%BB%B6/Gitea%E5%90%88%E4%BD%B5%E8%AB%8B%E6%B1%82%E6%93%8D%E4%BD%9C%E6%89%8B%E9%A0%86%E6%9B%B8/Gitea%E5%90%88%E4%BD%B5%E8%AB%8B%E6%B1%82%E6%93%8D%E4%BD%9C%E6%89%8B%E9%A0%86%E6%9B%B8.md)] 文件
