@@ -24,15 +24,13 @@
 
 首次登入的話「分機號碼」請務必填寫
 
-![](images\media2\image5.png){width="3.0416666666666665in"
-height="2.7291666666666665in"}
+![](images\media2\image5.png)
 
 「案件類別」選擇所屬專案
 
 「案件名稱」填寫「申請gametower後端工具權限」
 
-![](images\media2\image6.png){width="5.041666666666667in"
-height="4.947916666666667in"}
+![](images\media2\image6.png)
 
 「備註說明」詳細填寫權限需求，內容範例
 
