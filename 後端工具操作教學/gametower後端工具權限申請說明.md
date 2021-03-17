@@ -30,7 +30,7 @@
 
 「案件名稱」填寫「申請gametower後端工具權限」
 
-![](images\media2\image6.png)
+![](images/media2/image6.png)
 
 「備註說明」詳細填寫權限需求，內容範例
 
