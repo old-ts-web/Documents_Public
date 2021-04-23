@@ -11,6 +11,7 @@
 | **1.46.0** | 2021/03/10 | 林子傑 | 新增六十一、取得和設定會員資料API |
 | **1.47.0** | 2021/03/18 | 謝昇富 | 2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
 | **1.48.0** | 2021/04/23 | 林子傑 | 新增六十二、Firebase訊息推播 token 蒐集 API |
+| **1.49.0** | 2021/04/23 | 魏嘉男 | 因Member站台下掉修改相關domain |
 
 ## 1.說明
 
@@ -32,14 +33,6 @@ MA站台各環境網址
 **外測環境：ma-twtest.towergame.com**
 
 **正式環境：ma.gametower.com.tw**
-
-Member站台各環境網址
-
-**開發環境：member.gt.web**
-
-**外測環境：member-twtest.towergame.com**
-
-**正式環境：member.gametower.com.tw**
 
 ex站台各環境網址
 
@@ -288,7 +281,7 @@ UrlReferrer = \"https://www.gt.web/Member/Register.aspx\" ;
 注意：請使用Server端呼叫驗證，
 Server的IP須提供給網頁組加入允許Server呼叫驗證清單。
 
-驗證網址：<https://member.gt.web/Member/Login.aspx>
+驗證網址：<https://www.gt.web/Member/Login.aspx>
 
 傳遞參數方式：
 | Request Header |                       |
@@ -2534,7 +2527,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ## 31.取得驗證碼 API
 
-驗證網址：<http://member.gt.web/common/receive/VerifyCode.aspx>
+驗證網址：<http://www.gt.web/common/receive/VerifyCode.aspx>
 
 傳遞參數方式：
 | Request Header |      |
@@ -2593,7 +2586,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ## 32.驗證驗證碼 API
 
-驗證網址：<http://member.gt.web/common/receive/VerifyCode.aspx>
+驗證網址：<http://www.gt.web/common/receive/VerifyCode.aspx>
 
 傳遞參數方式：
 
@@ -4178,9 +4171,9 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
     ※ 「E-mail電子信箱」請填公司個人信箱e.g. *damonhou\@igs.com.tw*
 
 2.  gametower帳號升級為標準會員：
-    開發：<https://member.gt.web/member/login.aspx?re=https%3A%2F%2Fwww.gt.web%2Fmember%2Fregister.aspx>\
-    測試：<https://member-twtest.towergame.com/member/login.aspx?re=https%3A%2F%2Fwww-twtest.towergame.com%2Fmember%2Fregister.aspx>\
-    正式：<https://member.gametower.com.tw/member/login.aspx?re=https%3A%2F%2Fwww.gametower.com.tw%2Fmember%2Fregister.aspx>\
+    開發：<https://www.gt.web/member/login.aspx?re=https%3A%2F%2Fwww.gt.web%2Fmember%2Fregister.aspx>\
+    測試：<https://www-twtest.towergame.com/member/login.aspx?re=https%3A%2F%2Fwww-twtest.towergame.com%2Fmember%2Fregister.aspx>\
+    正式：<https://www.gametower.com.tw/member/login.aspx?re=https%3A%2F%2Fwww.gametower.com.tw%2Fmember%2Fregister.aspx>\
     ※ 請填真實姓名e.g. *侯志成*
 
 3.  gametower帳號綁定LINE帳號：
