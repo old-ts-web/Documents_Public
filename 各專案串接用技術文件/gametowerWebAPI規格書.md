@@ -10,6 +10,7 @@
 | **1.45.0** | 2021/03/02  | 謝昇富 | 1\.修改十、取得是否已進行過手機撥號或手機簡訊認證(新增會員帳號)<br>2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
 | **1.46.0** | 2021/03/10 | 林子傑 | 新增六十一、取得和設定會員資料API |
 | **1.47.0** | 2021/03/18 | 謝昇富 | 2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
+| **1.48.0** | 2021/04/23 | 林子傑 | 新增六十二、Firebase訊息推播 token 蒐集 API |
 
 ## 1.說明
 
@@ -5173,4 +5174,85 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 	"RETURN_MESSAGE": "需進行會員升級才可使用生日功能"
 }
 ```
+
+## 62.Firebase訊息推播 token 蒐集 API網址
+
+開發：http://message.gt.web/Firebase/AddUser.aspx
+
+測試：https://message-twtest.towergame.com/Firebase/AddUser.aspx
+
+正式：https://message.gametower.com.tw/Firebase/AddUser.aspx
+
+> 功能描述
+>
+> 驗證 firebase token、取得用戶訂閱主題、用戶授權資料，驗證成功會記錄 token 和用戶識別值到網頁資料庫，作為推播發送識別資料<br>(有被蒐集的用戶，將可透過工具進行指定用戶名單推播)
+
+傳遞參數方式：
+
+| Request Header |      |
+| -------------- | ---- |
+| HTTP Method    | POST |
+
+需要參數：
+
+| 參數名稱 | 規格   | 是否必填 | 描述                                                         |
+| -------- | ------ | -------- | ------------------------------------------------------------ |
+| PID      | string | 是       | 專案 ID (申請串接時由網頁組提供)                             |
+| ACC      | string | 是       | 會員識別值 (會員編號或會員帳號)                              |
+| TOKEN    | string | 是       | firebase token                                               |
+| LF       | string | 否       | 回傳內容，多組代碼以逗號分隔，若不需要取得 token 細節可以不帶<br>代碼種類：<br>1.TOKEN_DETAIL：取得完整 firebase token 授權資訊<br>2.SUBSCRIBED_TOPICS：取得玩家有訂閱的主題<br>多組範例：<br>LF=TOKEN_DETAIL,SUBSCRIBED_TOPICS |
+
+回傳參數說明：
+
+| 值             | 說明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| RETURN_CODE    | 0：成功，其餘：失敗                                          |
+| RETURN_MESSAGE | 有錯誤時會有錯誤訊息                                         |
+| RESULT         | 有 LF 且 RETURN_CODE = 0才會有內容<br><br>1.取得完整 firebase token 授權資訊：TOKEN_DETAIL<br>回傳以下參數<br>"TOKEN_DETAIL":  {轉拋 firebase API 驗證結果 json}<br/><br>2.設定取得玩家有訂閱的主題：SUBSCRIBED_TOPICS<br>回傳以下參數<br/>"SUBSCRIBED_TOPICS":  {有訂閱的主題 + 訂閱時間}<br/> |
+
+
+
+回傳格式：
+
+LF=TOKEN_DETAIL,SUBSCRIBED_TOPICS
+
+```json
+{
+  "RETURN_CODE": 0,
+  "RETURN_MESSAGE": "success",
+  "RESULT": {
+    "TOKEN_DETAIL": {
+      "applicationVersion": "6.9.45.1",
+      "application": "com.igs.xxx",
+      "scope": "*",
+      "authorizedEntity": "xxx",
+      "rel": {
+        "topics": {
+          "xxxxxx": {
+            "addDate": "2020-10-07"
+          }
+        }
+      },
+      "platform": "IOS"
+    },
+    "SUBSCRIBED_TOPICS": {
+      "xxxxxx": {
+        "addDate": "2020-10-07"
+      }
+    }
+  }
+}
+```
+
+失敗範例
+
+```json
+{
+  "RETURN_CODE": -5,
+  "RETURN_MESSAGE": "TOKEN invalid",
+  "RESULT": {}
+}
+```
+
+## 
 
