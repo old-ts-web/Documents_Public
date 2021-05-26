@@ -526,7 +526,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | viplevel        |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
 | lang            |          | TW                                       | 多國語系規格，目前提供 TW、EN與CN，預設：TW                  |
 | platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
-| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | 智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
+| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | ※此參數預計2021/7/14更新至正式環境<BR><BR>智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
 | check_code      | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 | 圖片            |          |                                          | 須透過FormData file upload，圖片不能超過5mb                  |
 
@@ -2371,13 +2371,18 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 data可傳入欄位與對應Result object欄位
 
-| 傳入欄位                    | 回傳欄位                                          |
-| --------------------------- | ------------------------------------------------- |
-| MEMBER_TYPE                 | MEMBER_TYPE<br>MEMBER_TYPE_NAME<br>MEMBER_UPGRADE |
-| MEMBER_MOBILE_VERIFY_STATUS | MOBILE_VERIFY_STATUS<br>IS_MEMBER_EVER_VERIFIED   |
-| VERIFY_PHONE_NUMBER         | VERIFY_PHONE_NUMBER                               |
-| VERIFY_EXPIRE_DATE          | VERIFY_EXPIRE_DATE                                |
-| ALIAS                       | ALIAS                                             |
+| 傳入欄位                            | 回傳欄位                                          | 備註                        |
+| ----------------------------------- | ------------------------------------------------- | --------------------------- |
+| MEMBER_TYPE                         | MEMBER_TYPE<br>MEMBER_TYPE_NAME<br>MEMBER_UPGRADE |                             |
+| MEMBER_MOBILE_VERIFY_STATUS         | MOBILE_VERIFY_STATUS<br>IS_MEMBER_EVER_VERIFIED   |                             |
+| VERIFY_PHONE_NUMBER                 | VERIFY_PHONE_NUMBER                               |                             |
+| VERIFY_EXPIRE_DATE                  | VERIFY_EXPIRE_DATE                                |                             |
+| ALIAS                               | ALIAS                                             |                             |
+| IS_BIRTHDAY                         | IS_BIRTHDAY                                       |                             |
+| FREEPLAY_NICKNAME                   | FREEPLAY_NICKNAME                                 |                             |
+| VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT | VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT               | 預計2021/7/14更新至正式環境 |
+| MEMBER_NO                           | MEMBER_NO                                         |                             |
+| ACCOUNT                             | ACCOUNT                                           |                             |
 
 回傳參數說明：
 
@@ -2403,7 +2408,7 @@ Result object
 | ALIAS                               | 帳號別名                     | String   |                                         |
 | IS_BIRTHDAY                         | 今日是否生日                 | Boolean  | True = 是<br/>False = 否                |
 | FREEPLAY_NICKNAME                   | 明星平台暱稱                 | String   |                                         |
-| VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT | 會員認證電話號碼(加密的內容) | String   |                                         |
+| VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT | 會員認證電話號碼(加密的內容) | String   | 預計2021/7/14更新至正式環境             |
 | MEMBER_NO                           | 會員編號                     | int      |                                         |
 | ACCOUNT                             | 帳號                         | String   |                                         |
 
