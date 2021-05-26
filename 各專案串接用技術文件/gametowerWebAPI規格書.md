@@ -12,6 +12,7 @@
 | **1.47.0** | 2021/03/18 | 謝昇富 | 2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
 | **1.48.0** | 2021/04/23 | 林子傑 | 新增六十二、Firebase訊息推播 token 蒐集 API |
 | **1.49.0** | 2021/04/23 | 魏嘉男 | 因Member站台下掉修改相關domain |
+| **1.50.0** | 2021/05/26 | 吳志豪 | 1. 修改 『29. 查詢指定會員的會員資料 API』 中 data 可傳入欄位新增<br>『VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT』與同步技術文件有缺的<br />2. 修改 『7.新增問題回報 API』新增傳入參數『IntumitDialogId(智能客服對話紀錄識別ID)』 |
 
 ## 1.說明
 
@@ -510,23 +511,24 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 需要參數：
 
-| 參數         | 是否必填 | 值範例                                   | 說明                                                         |
-| ------------ | -------- | ---------------------------------------- | ------------------------------------------------------------ |
-| game         | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
-| class_no     | V        | 138                                      | 可使用『取得問題回報分類』API取得                            |
-| member_no    | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
-| username     | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
-| email        | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
-| phone        |          | 0987654321                               | 電話                                                         |
-| message      | V        | 測試訊息                                 | 回報內容                                                     |
-| uni_business | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
-| os           |          |                                          | 作業系統                                                     |
-| info         |          |                                          | 遊戲端對應LOG資訊                                            |
-| viplevel     |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
-| lang         |          | TW                                       | 多國語系規格，目前提供 TW、EN與CN，預設：TW                  |
-| platform     | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
-| check_code   | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
-| 圖片         |          |                                          | 須透過FormData file upload，圖片不能超過5mb                  |
+| 參數            | 是否必填 | 值範例                                   | 說明                                                         |
+| --------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
+| game            | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
+| class_no        | V        | 138                                      | 可使用『取得問題回報分類』API取得                            |
+| member_no       | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
+| username        | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
+| email           | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
+| phone           |          | 0987654321                               | 電話                                                         |
+| message         | V        | 測試訊息                                 | 回報內容                                                     |
+| uni_business    | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
+| os              |          |                                          | 作業系統                                                     |
+| info            |          |                                          | 遊戲端對應LOG資訊                                            |
+| viplevel        |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
+| lang            |          | TW                                       | 多國語系規格，目前提供 TW、EN與CN，預設：TW                  |
+| platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
+| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | 智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
+| check_code      | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
+| 圖片            |          |                                          | 須透過FormData file upload，圖片不能超過5mb                  |
 
 check_code範例程式如下
 
@@ -2389,16 +2391,21 @@ data可傳入欄位與對應Result object欄位
 
 Result object
 
-| 欄位                    | 資料名稱               | 資料類型 | 備註                                    |
-| ----------------------- | ---------------------- | -------- | --------------------------------------- |
-| MEMBER_TYPE             | 會員身份               | String   |                                         |
-| MEMBER_TYPE_NAME        | 會員身份中文名稱       | String   |                                         |
-| MEMBER_UPGRADE          | 是否可以升級為標準會員 | boolean  |                                         |
-| MOBILE_VERIFY_STATUS    | 是否為已認證會員       | boolean  |                                         |
-| VERIFY_PHONE_NUMBER     | 會員認證電話號碼       | String   | 中間有 * 作為隱碼                       |
-| VERIFY_EXPIRE_DATE      | 會員認證過期日期       | String   | 格式為 yyyy/MM/dd                       |
-| IS_MEMBER_EVER_VERIFIED | 會員是否曾經認證過     | Boolean  | True = 曾經認證過<br>False = 從未認證過 |
-| ALIAS                   | 帳號別名               | String   |                                         |
+| 欄位                                | 資料名稱                     | 資料類型 | 備註                                    |
+| ----------------------------------- | ---------------------------- | -------- | --------------------------------------- |
+| MEMBER_TYPE                         | 會員身份                     | String   |                                         |
+| MEMBER_TYPE_NAME                    | 會員身份中文名稱             | String   |                                         |
+| MEMBER_UPGRADE                      | 是否可以升級為標準會員       | boolean  |                                         |
+| MOBILE_VERIFY_STATUS                | 是否為已認證會員             | boolean  |                                         |
+| VERIFY_PHONE_NUMBER                 | 會員認證電話號碼             | String   | 中間有 * 作為隱碼                       |
+| VERIFY_EXPIRE_DATE                  | 會員認證過期日期             | String   | 格式為 yyyy/MM/dd                       |
+| IS_MEMBER_EVER_VERIFIED             | 會員是否曾經認證過           | Boolean  | True = 曾經認證過<br>False = 從未認證過 |
+| ALIAS                               | 帳號別名                     | String   |                                         |
+| IS_BIRTHDAY                         | 今日是否生日                 | Boolean  | True = 是<br/>False = 否                |
+| FREEPLAY_NICKNAME                   | 明星平台暱稱                 | String   |                                         |
+| VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT | 會員認證電話號碼(加密的內容) | String   |                                         |
+| MEMBER_NO                           | 會員編號                     | int      |                                         |
+| ACCOUNT                             | 帳號                         | String   |                                         |
 
 
 
