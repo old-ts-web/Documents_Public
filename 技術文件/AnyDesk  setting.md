@@ -65,3 +65,12 @@
 > 輸入雙重驗證碼，點「連線」
 
 ![image-20210528112306092](http://igscloud2/index.php/s/t9WxxGarQckS6eQ/preview)
+
+
+
+## 避免輸入法衝突
+
+> 遙控端電腦 (居家電腦) 請切換至英文鍵盤，
+> 避免 AnyDesk 內無法快速鍵切換輸入法。
+
+![image-20210528134701371](http://igscloud2/index.php/s/G5z8nERRwYgk4QD/preview)
