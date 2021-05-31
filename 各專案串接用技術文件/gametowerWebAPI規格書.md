@@ -9,7 +9,8 @@
 | **1.48.0** | 2021/04/23 | 林子傑 | 新增六十二、Firebase訊息推播 token 蒐集 API |
 | **1.49.0** | 2021/04/23 | 魏嘉男 | 因Member站台下掉修改相關domain |
 | **1.50.0** | 2021/05/26 | 吳志豪 | 1. 修改 『29. 查詢指定會員的會員資料 API』 中 data 可傳入欄位新增<br>『VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT』與同步技術文件有缺的<br />2. 修改 『7.新增問題回報 API』新增傳入參數『IntumitDialogId(智能客服對話紀錄識別ID)』 |
-| *1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
+| **1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
+| **1.51.1** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁 |
 
 ## 1.說明
 
@@ -4137,8 +4138,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | f_strAccounts  | string | 否       | gametower會員帳號<br>※人員離/調職容易漏改                    |
 | f_strMemberNos | string | 否       | gametower會員編號<br>※人員離/調職容易漏改                    |
 | f_strMessage   | string | 昰       | 發送訊息內文，若未在 querystring 或  form data 取到值，將嘗試讀取 body |
-
-
+| MessageFormat  | string | 否       | 訊息格式轉換 (目前支援 JSON、JARRAY)<br>可避免特定格式訊息以 unicode 呈現<br/>例如：<br/>{"Instance\u540d\u7a31":"abc"}<br/>若指定  MessageFormat=JSON 將呈現 <br/>{"Instance名稱":"abc"} |
 
 回傳格式：
 
@@ -4240,10 +4240,11 @@ or
 
 需要參數：
 
-| 參數名稱     | 規格   | 是否必填 | 描述                                                         |
-| ------------ | ------ | -------- | ------------------------------------------------------------ |
-| f_strUsageID | string | 昰       | 群組識別代碼，由網頁組人員提供<br>專案需於工單提供要通知的 LINE 群，網頁組再根據群組特性命名識別代碼<br>e.g.「滿貫大亨資料異常通知」為TMD_DATA_ERROR<br>※該群組人員離/調職為各專案自行掌控 |
-| f_strMessage | string | 昰       | 發送訊息內文，若未在 querystring 或  form data 取到值，將嘗試讀取 body |
+| 參數名稱      | 規格   | 是否必填 | 描述                                                         |
+| ------------- | ------ | -------- | ------------------------------------------------------------ |
+| f_strUsageID  | string | 昰       | 群組識別代碼，由網頁組人員提供<br>專案需於工單提供要通知的 LINE 群，網頁組再根據群組特性命名識別代碼<br>e.g.「滿貫大亨資料異常通知」為TMD_DATA_ERROR<br>※該群組人員離/調職為各專案自行掌控 |
+| f_strMessage  | string | 昰       | 發送訊息內文，若未在 querystring 或  form data 取到值，將嘗試讀取 body |
+| MessageFormat | string | 否       | 訊息格式轉換 (目前支援 JSON、JARRAY)<br>可避免特定格式訊息以 unicode 呈現<br/>例如：<br/>{"Instance\u540d\u7a31":"abc"}<br/>若指定  MessageFormat=JSON 將呈現 <br/>{"Instance名稱":"abc"} |
 
 
 
