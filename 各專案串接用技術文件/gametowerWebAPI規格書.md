@@ -5204,12 +5204,34 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 需要參數：
 
-| 參數名稱 | 規格   | 是否必填 | 描述                                                         |
-| -------- | ------ | -------- | ------------------------------------------------------------ |
-| PID      | string | 是       | 專案 ID (申請串接時由網頁組提供)                             |
-| ACC      | string | 是       | 會員識別值 (會員編號或會員帳號)                              |
-| TOKEN    | string | 是       | firebase token                                               |
-| LF       | string | 否       | 回傳內容，多組代碼以逗號分隔，若不需要取得 token 細節可以不帶<br>代碼種類：<br>1.TOKEN_DETAIL：取得完整 firebase token 授權資訊<br>2.SUBSCRIBED_TOPICS：取得玩家有訂閱的主題<br>多組範例：<br>LF=TOKEN_DETAIL,SUBSCRIBED_TOPICS |
+| 參數名稱   | 規格   | 是否必填 | 描述                                                         |
+| ---------- | ------ | -------- | ------------------------------------------------------------ |
+| PID        | string | 是       | 專案 ID (申請串接時由網頁組提供)                             |
+| ACC        | string | 是       | 會員識別值 (會員編號或會員帳號)                              |
+| TOKEN      | string | 是       | firebase token                                               |
+| LF         | string | 否       | 回傳內容，多組代碼以逗號分隔，若不需要取得 token 細節可以不帶<br>代碼種類：<br>1.TOKEN_DETAIL：取得完整 firebase token 授權資訊<br>2.SUBSCRIBED_TOPICS：取得玩家有訂閱的主題<br>多組範例：<br>LF=TOKEN_DETAIL,SUBSCRIBED_TOPICS |
+| CHECK_CODE | string | 必填     | 將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1 加密而成<br/>※要轉大寫 |
+
+CHECK_CODE範例程式如下
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+
+     // 依照 Key 排序，將所有 Value 相加 (排除 CHECK_CODE 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+         if (!strKey.Equals("CHECK_CODE",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+
+     return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA1") ;
+}
+
+```
 
 回傳參數說明：
 
