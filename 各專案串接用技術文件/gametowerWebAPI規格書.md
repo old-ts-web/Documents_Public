@@ -6,11 +6,10 @@
 | ---------- | ---------- | ------ | ------------------------------------------------------------ |
 | **1.0**    | 2015/10/16  | 魏嘉男 | 新建立文件                    |
 | (略)       |            |        |                                                              |
-| **1.44.0** | 2021/01/04  | 林子傑 | 新增六十、儲值黑名單上限API   |
-| **1.45.0** | 2021/03/02  | 謝昇富 | 1\.修改十、取得是否已進行過手機撥號或手機簡訊認證(新增會員帳號)<br>2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
-| **1.46.0** | 2021/03/10 | 林子傑 | 新增六十一、取得和設定會員資料API |
-| **1.47.0** | 2021/03/18 | 謝昇富 | 2\.修改九、遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc) |
 | **1.48.0** | 2021/04/23 | 林子傑 | 新增六十二、Firebase訊息推播 token 蒐集 API |
+| **1.49.0** | 2021/04/23 | 魏嘉男 | 因Member站台下掉修改相關domain |
+| **1.50.0** | 2021/05/26 | 吳志豪 | 1. 修改 『29. 查詢指定會員的會員資料 API』 中 data 可傳入欄位新增<br>『VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT』與同步技術文件有缺的<br />2. 修改 『7.新增問題回報 API』新增傳入參數『IntumitDialogId(智能客服對話紀錄識別ID)』 |
+| *1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
 
 ## 1.說明
 
@@ -32,14 +31,6 @@ MA站台各環境網址
 **外測環境：ma-twtest.towergame.com**
 
 **正式環境：ma.gametower.com.tw**
-
-Member站台各環境網址
-
-**開發環境：member.gt.web**
-
-**外測環境：member-twtest.towergame.com**
-
-**正式環境：member.gametower.com.tw**
 
 ex站台各環境網址
 
@@ -288,7 +279,7 @@ UrlReferrer = \"https://www.gt.web/Member/Register.aspx\" ;
 注意：請使用Server端呼叫驗證，
 Server的IP須提供給網頁組加入允許Server呼叫驗證清單。
 
-驗證網址：<https://member.gt.web/Member/Login.aspx>
+驗證網址：<https://www.gt.web/Member/Login.aspx>
 
 傳遞參數方式：
 | Request Header |                       |
@@ -517,23 +508,24 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 需要參數：
 
-| 參數         | 是否必填 | 值範例                                   | 說明                                                         |
-| ------------ | -------- | ---------------------------------------- | ------------------------------------------------------------ |
-| game         | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
-| class_no     | V        | 138                                      | 可使用『取得問題回報分類』API取得                            |
-| member_no    | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
-| username     | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
-| email        | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
-| phone        |          | 0987654321                               | 電話                                                         |
-| message      | V        | 測試訊息                                 | 回報內容                                                     |
-| uni_business | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
-| os           |          |                                          | 作業系統                                                     |
-| info         |          |                                          | 遊戲端對應LOG資訊                                            |
-| viplevel     |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
-| lang         |          | TW                                       | 多國語系規格，目前提供 TW、EN與CN，預設：TW                  |
-| platform     | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
-| check_code   | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
-| 圖片         |          |                                          | 須透過FormData file upload，圖片不能超過5mb                  |
+| 參數            | 是否必填 | 值範例                                   | 說明                                                         |
+| --------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
+| game            | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
+| class_no        | V        | 138                                      | 可使用『取得問題回報分類』API取得                            |
+| member_no       | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
+| username        | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
+| email           | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
+| phone           |          | 0987654321                               | 電話                                                         |
+| message         | V        | 測試訊息                                 | 回報內容                                                     |
+| uni_business    | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
+| os              |          |                                          | 作業系統                                                     |
+| info            |          |                                          | 遊戲端對應LOG資訊                                            |
+| viplevel        |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
+| lang            |          | TW                                       | 多國語系規格，目前提供 TW、EN與CN，預設：TW                  |
+| platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
+| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | ※此參數預計2021/7/14更新至正式環境<BR><BR>智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
+| check_code      | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
+| 圖片            |          |                                          | 須透過FormData file upload，圖片不能超過5mb                  |
 
 check_code範例程式如下
 
@@ -2376,13 +2368,18 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 data可傳入欄位與對應Result object欄位
 
-| 傳入欄位                    | 回傳欄位                                          |
-| --------------------------- | ------------------------------------------------- |
-| MEMBER_TYPE                 | MEMBER_TYPE<br>MEMBER_TYPE_NAME<br>MEMBER_UPGRADE |
-| MEMBER_MOBILE_VERIFY_STATUS | MOBILE_VERIFY_STATUS<br>IS_MEMBER_EVER_VERIFIED   |
-| VERIFY_PHONE_NUMBER         | VERIFY_PHONE_NUMBER                               |
-| VERIFY_EXPIRE_DATE          | VERIFY_EXPIRE_DATE                                |
-| ALIAS                       | ALIAS                                             |
+| 傳入欄位                            | 回傳欄位                                          | 備註                        |
+| ----------------------------------- | ------------------------------------------------- | --------------------------- |
+| MEMBER_TYPE                         | MEMBER_TYPE<br>MEMBER_TYPE_NAME<br>MEMBER_UPGRADE |                             |
+| MEMBER_MOBILE_VERIFY_STATUS         | MOBILE_VERIFY_STATUS<br>IS_MEMBER_EVER_VERIFIED   |                             |
+| VERIFY_PHONE_NUMBER                 | VERIFY_PHONE_NUMBER                               |                             |
+| VERIFY_EXPIRE_DATE                  | VERIFY_EXPIRE_DATE                                |                             |
+| ALIAS                               | ALIAS                                             |                             |
+| IS_BIRTHDAY                         | IS_BIRTHDAY                                       |                             |
+| FREEPLAY_NICKNAME                   | FREEPLAY_NICKNAME                                 |                             |
+| VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT | VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT               | 預計2021/7/14更新至正式環境 |
+| MEMBER_NO                           | MEMBER_NO                                         |                             |
+| ACCOUNT                             | ACCOUNT                                           |                             |
 
 回傳參數說明：
 
@@ -2396,16 +2393,21 @@ data可傳入欄位與對應Result object欄位
 
 Result object
 
-| 欄位                    | 資料名稱               | 資料類型 | 備註                                    |
-| ----------------------- | ---------------------- | -------- | --------------------------------------- |
-| MEMBER_TYPE             | 會員身份               | String   |                                         |
-| MEMBER_TYPE_NAME        | 會員身份中文名稱       | String   |                                         |
-| MEMBER_UPGRADE          | 是否可以升級為標準會員 | boolean  |                                         |
-| MOBILE_VERIFY_STATUS    | 是否為已認證會員       | boolean  |                                         |
-| VERIFY_PHONE_NUMBER     | 會員認證電話號碼       | String   | 中間有 * 作為隱碼                       |
-| VERIFY_EXPIRE_DATE      | 會員認證過期日期       | String   | 格式為 yyyy/MM/dd                       |
-| IS_MEMBER_EVER_VERIFIED | 會員是否曾經認證過     | Boolean  | True = 曾經認證過<br>False = 從未認證過 |
-| ALIAS                   | 帳號別名               | String   |                                         |
+| 欄位                                | 資料名稱                     | 資料類型 | 備註                                    |
+| ----------------------------------- | ---------------------------- | -------- | --------------------------------------- |
+| MEMBER_TYPE                         | 會員身份                     | String   |                                         |
+| MEMBER_TYPE_NAME                    | 會員身份中文名稱             | String   |                                         |
+| MEMBER_UPGRADE                      | 是否可以升級為標準會員       | boolean  |                                         |
+| MOBILE_VERIFY_STATUS                | 是否為已認證會員             | boolean  |                                         |
+| VERIFY_PHONE_NUMBER                 | 會員認證電話號碼             | String   | 中間有 * 作為隱碼                       |
+| VERIFY_EXPIRE_DATE                  | 會員認證過期日期             | String   | 格式為 yyyy/MM/dd                       |
+| IS_MEMBER_EVER_VERIFIED             | 會員是否曾經認證過           | Boolean  | True = 曾經認證過<br>False = 從未認證過 |
+| ALIAS                               | 帳號別名                     | String   |                                         |
+| IS_BIRTHDAY                         | 今日是否生日                 | Boolean  | True = 是<br/>False = 否                |
+| FREEPLAY_NICKNAME                   | 明星平台暱稱                 | String   |                                         |
+| VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT | 會員認證電話號碼(加密的內容) | String   | 預計2021/7/14更新至正式環境             |
+| MEMBER_NO                           | 會員編號                     | int      |                                         |
+| ACCOUNT                             | 帳號                         | String   |                                         |
 
 
 
@@ -2534,7 +2536,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ## 31.取得驗證碼 API
 
-驗證網址：<http://member.gt.web/common/receive/VerifyCode.aspx>
+驗證網址：<http://www.gt.web/common/receive/VerifyCode.aspx>
 
 傳遞參數方式：
 | Request Header |      |
@@ -2593,7 +2595,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ## 32.驗證驗證碼 API
 
-驗證網址：<http://member.gt.web/common/receive/VerifyCode.aspx>
+驗證網址：<http://www.gt.web/common/receive/VerifyCode.aspx>
 
 傳遞參數方式：
 
@@ -4134,7 +4136,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | f_strRoleIDs   | string | 否       | 角色識別代碼，需搭配f_strProjectID<br>e.g.「運營人員」為OPERATE_USER<br>※人員離/調職有每季清查，易於掌控，需事先透過http://www.webcase.web/向網頁組申請 |
 | f_strAccounts  | string | 否       | gametower會員帳號<br>※人員離/調職容易漏改                    |
 | f_strMemberNos | string | 否       | gametower會員編號<br>※人員離/調職容易漏改                    |
-| f_strMessage   | string | 昰       | 發送訊息內文                                                 |
+| f_strMessage   | string | 昰       | 發送訊息內文，若未在 querystring 或  form data 取到值，將嘗試讀取 body |
 
 
 
@@ -4178,9 +4180,9 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
     ※ 「E-mail電子信箱」請填公司個人信箱e.g. *damonhou\@igs.com.tw*
 
 2.  gametower帳號升級為標準會員：
-    開發：<https://member.gt.web/member/login.aspx?re=https%3A%2F%2Fwww.gt.web%2Fmember%2Fregister.aspx>\
-    測試：<https://member-twtest.towergame.com/member/login.aspx?re=https%3A%2F%2Fwww-twtest.towergame.com%2Fmember%2Fregister.aspx>\
-    正式：<https://member.gametower.com.tw/member/login.aspx?re=https%3A%2F%2Fwww.gametower.com.tw%2Fmember%2Fregister.aspx>\
+    開發：<https://www.gt.web/member/login.aspx?re=https%3A%2F%2Fwww.gt.web%2Fmember%2Fregister.aspx>\
+    測試：<https://www-twtest.towergame.com/member/login.aspx?re=https%3A%2F%2Fwww-twtest.towergame.com%2Fmember%2Fregister.aspx>\
+    正式：<https://www.gametower.com.tw/member/login.aspx?re=https%3A%2F%2Fwww.gametower.com.tw%2Fmember%2Fregister.aspx>\
     ※ 請填真實姓名e.g. *侯志成*
 
 3.  gametower帳號綁定LINE帳號：
@@ -4223,6 +4225,13 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 傳遞參數方式：
 
+| Request Header |                       |
+| -------------- | --------------------- |
+| HTTP Method    | POST                  |
+| Content Type   | x-www-form-urlencoded |
+
+or
+
 | Request Header |      |
 | -------------- | ---- |
 | HTTP Method    | GET  |
@@ -4234,7 +4243,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | 參數名稱     | 規格   | 是否必填 | 描述                                                         |
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
 | f_strUsageID | string | 昰       | 群組識別代碼，由網頁組人員提供<br>專案需於工單提供要通知的 LINE 群，網頁組再根據群組特性命名識別代碼<br>e.g.「滿貫大亨資料異常通知」為TMD_DATA_ERROR<br>※該群組人員離/調職為各專案自行掌控 |
-| f_strMessage | string | 昰       | 發送訊息內文                                                 |
+| f_strMessage | string | 昰       | 發送訊息內文，若未在 querystring 或  form data 取到值，將嘗試讀取 body |
 
 
 
