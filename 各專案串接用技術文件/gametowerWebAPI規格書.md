@@ -11,6 +11,7 @@
 | **1.50.0** | 2021/05/26 | 吳志豪 | 1. 修改 『29. 查詢指定會員的會員資料 API』 中 data 可傳入欄位新增<br>『VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT』與同步技術文件有缺的<br />2. 修改 『7.新增問題回報 API』新增傳入參數『IntumitDialogId(智能客服對話紀錄識別ID)』 |
 | **1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
 | **1.51.1** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁 |
+| **1.52.0** | 2021/06/23 | 林子傑 | 新增六十三、取得會員白名單資訊 |
 
 ## 1.說明
 
@@ -5283,6 +5284,60 @@ LF=TOKEN_DETAIL,SUBSCRIBED_TOPICS
   "RETURN_CODE": -5,
   "RETURN_MESSAGE": "TOKEN invalid",
   "RESULT": {}
+}
+```
+
+## 63.取得會員白名單資訊
+
+開發：http://www.gt.web/common/receive/Member/GetMemberWhiteStatus.aspx
+
+測試：https://www-twtest.towergame.com/common/receive/Member/GetMemberWhiteStatus.aspx
+
+正式：https://www.gametower.com.tw/common/receive/Member/GetMemberWhiteStatus.aspx
+
+> 功能描述
+>
+> 取得會員是否為白名單、是否有儲值過第三方
+
+傳遞參數方式：
+
+| Request Header |      |
+| -------------- | ---- |
+| HTTP Method    | GET  |
+
+需要參數：
+
+| 參數名稱      | 規格   | 是否必填 | 描述                                                         |
+| ------------- | ------ | -------- | ------------------------------------------------------------ |
+| lc            | string | 是       | 會員登入碼                                                   |
+| q_nGameNo     | int    | 是       | 遊戲編號                                                     |
+| q_nPlatformNo | int    | 是       | 儲值平台		(0:WEB 1:MOBILE_ANDROID 2:MOBILE_IOS 3:MOBILE_WINDOWS) |
+| q_strData     | string | 否       | 回傳欄位<br>代碼種類：<br>1.THIRDPARTY_PAID：是否有儲值過第三方 |
+| q_strVersion  | string | 否       | 版本，若專案針對特定版本要特殊處理才帶                       |
+
+回傳參數說明：
+
+| 值             | 說明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| RETURN_CODE    | 0：成功，其餘：失敗                                          |
+| RETURN_MESSAGE | 有錯誤時會有錯誤訊息                                         |
+| RESULT         | RETURN_CODE = 0才會有內容<br><br>{<br/>	"IS_WHITE"				是否為第三方儲值白名單?!<br/>	"IS_THIRDPARTY_PAID"	是否有儲值過第三方 (若沒帶 q_strData 則不回傳)<br/>} |
+
+
+
+回傳格式：
+
+```json
+{"RETURN_CODE":0, "RETURN_MESSAGE":"成功","RESULT": {"IS_WHITE":"true"}}
+```
+
+失敗範例
+
+```json
+{
+  "RETURN_CODE": -2,
+  "RETURN_MESSAGE": "會員資料庫連線失敗",
+  "RESULT": null
 }
 ```
 
