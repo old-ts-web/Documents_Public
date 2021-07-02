@@ -57,8 +57,10 @@ $("td[width=20][align=center]:contains('#'):first").closest("tr").siblings().eac
     strResult     += `\t${$(rgTds[10]).find("span:first").text().split(" ")[0]}`;
 
     let rgstrMemo = [];
-    $(rgTds[5]).find("pre").html().split("<br>").forEach((pre, j) => {
-        rgstrMemo.push($($.parseHTML(pre)).text());
+    $(rgTds[5]).find("pre").each((j, pre) => {
+        $(pre).html().split("<br>").forEach((strPreText, k) => {
+           rgstrMemo.push($($.parseHTML(strPreText)).text());
+        });
     });
     strResult     += `\t"${rgstrMemo.join("\r\n")}"`;
 });
