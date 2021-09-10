@@ -7,10 +7,10 @@
 | --- | --- |--- | ---|
 | **0.5**    | 2010/12/06 | 魏嘉男 | 新建立文件                     |
 | (略) |  |  |  |
-| **1.56.0** | 2021/06/04 | 林子傑 | (1)四.付款方式代碼表修改 googleplay appstore<br/>(2)五.各付費方式延伸欄位說明修改 googleplay appstore |
 | **1.57.0** | 2021/06/23 | 林子傑 | (1)四.付款方式代碼表新增 銀聯<br/>(2)五.各付費方式延伸欄位說明新增 銀聯 |
 | **1.58.0** | 2021/08/10 | 林子傑 | (1)四.付款方式代碼表新增 VNPay、TruePay<br/>(2)五.各付費方式延伸欄位說明新增 VNPay、TruePay |
-| **1.58.0** | 2021/08/11 | 林子傑 | (1)四.付款方式代碼表新增 JSTPay<br/>(2)五.各付費方式延伸欄位說明新增 JSTPay |
+| **1.59.0** | 2021/08/11 | 林子傑 | (1)四.付款方式代碼表新增 JSTPay<br/>(2)五.各付費方式延伸欄位說明新增 JSTPay |
+| **1.60.0** | 2021/09/10 | 林子傑 | (1)調整 (八) 提出發票前端查詢/修改請求電文參數說明 |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -278,18 +278,11 @@
 
 提出交易請求電文連結位置：
 
-1. PC版介面
+1. RWD介面
 
 ```
-測試機：https://bank-twtest.towergame.com/Bank/Invoice/Record.aspx
-正式機：https://bank.gametower.com.tw/Bank/Invoice/Record.aspx
-```
-
-2. 手機Android版介面
-
-```
-測試機：https://bank-twtest.towergame.com/Mobile/Android/Bank/Invoice/Record.aspx
-正式機：https://bank.gametower.com.tw/Mobile/Android/Bank/Invoice/Record.aspx
+測試機：https://bank-twtest.towergame.com/user/invoicelist.aspx
+正式機：https://bank.gametower.com.tw/user/invoicelist.aspx
 ```
 
 ### (九)查詢訂單交易結果請求
