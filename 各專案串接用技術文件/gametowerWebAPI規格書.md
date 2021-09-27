@@ -6,13 +6,11 @@
 | ---------- | ---------- | ------ | ------------------------------------------------------------ |
 | **1.0**    | 2015/10/16  | 魏嘉男 | 新建立文件                    |
 | (略)       |            |        |                                                              |
-| **1.48.0** | 2021/04/23 | 林子傑 | 新增六十二、Firebase訊息推播 token 蒐集 API |
-| **1.49.0** | 2021/04/23 | 魏嘉男 | 因Member站台下掉修改相關domain |
-| **1.50.0** | 2021/05/26 | 吳志豪 | 1. 修改 『29. 查詢指定會員的會員資料 API』 中 data 可傳入欄位新增<br>『VERIFY_PHONE_NUMBER_ENCRYPT_CONTENT』與同步技術文件有缺的<br />2. 修改 『7.新增問題回報 API』新增傳入參數『IntumitDialogId(智能客服對話紀錄識別ID)』 |
 | **1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
 | **1.51.1** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁 |
 | **1.52.0** | 2021/06/23 | 林子傑 | 新增六十三、取得會員白名單資訊 |
-| **1.52.1** | 2021/09/27 | 林宥良 | 1.修改11.遊戲內序號兌換道具API，新增回傳關聯活動名稱 ACTION_NAME |
+| **1.53.0** | 2021/09/10 | 林子傑 | 修改52.電信撥號(CallOut)服務API，新增 2.0 模式 |
+| **1.54.0** | 2021/09/27 | 林宥良 | 1.修改11.遊戲內序號兌換道具API，新增回傳關聯活動名稱 ACTION_NAME |
 
 ## 1.說明
 
@@ -4015,6 +4013,14 @@ height="2.2958333333333334in"}
 
 <http://relay-agent.gametower.com.tw/common/receive/callout/send.aspx>
 
+版本流程說明：
+
+v1.0：輸入門號 → 發送驗證碼到手機 → 回填收到的驗證碼
+
+v2.0：輸入門號 → 顯示驗證碼給玩家 → 玩家記好後，發起來電 → 在手機上輸入驗證碼 → 背景通知輸入結果
+
+(v2.0 來電響鈴最多 1分鐘，接聽後有 約10秒可以輸入)
+
 傳遞參數方式：
 
 | Request Header |                       |
@@ -4030,7 +4036,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 
 
-需要參數：
+v1.0需要參數：
 
 | 參數名稱             | 規格       | 是否必填 | 描述                                                         |
 | -------------------- | ---------- | -------- | ------------------------------------------------------------ |
@@ -4040,8 +4046,25 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | f_strPhoneNumber     | string     | 昰       | 手機號碼(e.g. 09XXXXXXXX)                                    |
 | f_strVerifyPassword  | string     | 昰       | OTP驗證碼(僅支援純數字且長度勿超過6碼)                       |
 | f_strRemoteIP        | String(15) | 昰       | 使用者IP(僅支援IPV4規格 e.g: XXX.XXX.XXX.XXX)                |
-| f_strCheckCode       | int        | 昰       | 檢查碼(f_strCheckCode計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 f_strCheckCode 參數)，最後加上雙方約定的金鑰，再用 SHA1 加密並轉成大寫而成。 |
+| f_strCheckCode       | string     | 昰       | 檢查碼(f_strCheckCode計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 f_strCheckCode 參數)，最後加上雙方約定的金鑰，再用 SHA1 加密並轉成大寫而成。 |
 | f_strLangID          | string     | 否       | 傳入指定的LANGID，e.g 若要使用日文則帶入f_strLangID = 4<br>※ 若沒指定則依照國家別去判斷要用哪種語言<br>LANGID  語言別<br>1  中文<br>2  英文<br>3  印尼文<br>4  日文<br>5  泰文<br>6  西班牙文<br>7  越南文<br>8  馬來文 |
+
+v2.0需要參數：
+
+| 參數名稱             | 規格        | 是否必填 | 描述                                                         |
+| -------------------- | ----------- | -------- | ------------------------------------------------------------ |
+| f_strMemberIdentity  | string      | 是       | 會員識別值(GT平台則帶入會員帳號 商用則帶入ARK_ID  OR 專案可用來區分哪個會員的識別值)，重點是讓客服好追查的一個KEY值 |
+| f_strGameID          | string      | 昰       | 遊戲ID(請網頁組同仁提供)                                     |
+| f_nCountryCodeManual | int         | 昰       | 手機號碼國碼(e.g. 886)                                       |
+| f_strPhoneNumber     | string      | 昰       | 手機號碼(e.g. 09XXXXXXXX)                                    |
+| f_strVerifyPassword  | string      | 昰       | OTP驗證碼                                                    |
+| f_strRemoteIP        | String(15)  | 昰       | 使用者IP(僅支援IPV4規格 e.g: XXX.XXX.XXX.XXX)                |
+| f_strPlatformTransNo | String(50)  | 昰       | 廠商訂單編號                                                 |
+| f_strNotifyUrl       | String(300) | 昰       | 輸入結果通知網址                                             |
+| f_strCheckCode       | string      | 昰       | 檢查碼(f_strCheckCode計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 f_strCheckCode 參數)，最後加上雙方約定的金鑰，再用 SHA1 加密並轉成大寫而成。 |
+| f_strLangID          | string      | 否       | 傳入指定的LANGID，e.g 若要使用日文則帶入f_strLangID = 4<br>※ 若沒指定則依照國家別去判斷要用哪種語言<br>LANGID  語言別<br>1  中文<br>2  英文<br>3  印尼文<br>4  日文<br>5  泰文<br>6  西班牙文<br>7  越南文<br>8  馬來文 |
+
+
 
 f_strCheckCode範例程式：
 
@@ -4077,7 +4100,29 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 {"RESULT_CODE":"1","RESULT_MESSAGE":"手機號碼格式錯誤","OPERATOR_ORDER_NO":"","SERVICE_CENTER_TRANSRECORD_NO":-1,"OPERATOR_RETURN_STATUS_CODE":999}
 ```
 
+v2.0結果通知
 
+將呼叫發起請求時帶入的 f_strNotifyUrl
+
+傳遞參數方式：
+
+| Request Header |                       |
+| -------------- | --------------------- |
+| HTTP Method    | POST                  |
+| Content Type   | x-www-form-urlencoded |
+
+| 參數名稱                      | 規格      | 是否必填 | 描述                                                         |
+| ----------------------------- | --------- | -------- | ------------------------------------------------------------ |
+| SERVICE_CENTER_TRANSRECORD_NO | int       | 是       | 發起請求時回傳的 SERVICE_CENTER_TRANSRECORD_NO               |
+| PLATFORM_TRANS_NO             | string    | 昰       | 發起請求時帶入的廠商訂單編號                                 |
+| INPUT_OTP                     | string(6) | 昰       | 玩家輸入結果，若發生非預期行為(如未接聽、掛斷...等)將回傳 error |
+| CHECK_CODE                    | string    | 昰       | 檢查碼(計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE參數)，最後加上雙方約定的金鑰，再用 SHA1 加密並轉成大寫而成。 |
+
+f_strNotifyUrl 接收成功後請於頁面上印出
+
+```json
+RESULT_CODE=000000
+```
 
 備 註
 
@@ -4088,12 +4133,28 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 ![](images/media/image13.png){width="4.661111111111111in"
 height="2.7041666666666666in"}
 
-B.  **網頁範例**
+​		B.  **網頁範例**
 
 ![](images/media/image14.png){width="4.661111111111111in"
 height="3.990972222222222in"}
 
+2. v2.0 網頁流程範例
 
+   A.輸入門號
+
+![image-20210910163038056](images/image-20210910163038056.png)
+
+​		B.取得驗證碼
+
+![image-20210910163122568](images/image-20210910163122568.png)
+
+​		C.教學影片
+
+![image-20210910163227564](images/image-20210910163227564.png)
+
+​		D.確認玩家準備好後發起撥號，頁面背景等候撥號結果，每隔幾秒檢查是否有收到結果通知，有結果後進行		相應處理 (認證成功、驗證碼錯誤...)，等候結果建議超過 2分鐘沒回報就視為失敗(善意表示來電響鈴最多 1 分		鐘，玩家卡在最後關頭才接，有 10秒左右可以輸入)
+
+![image-20210910163345549](images/image-20210910163345549.png)
 
 ## 53.LINE Notify訊息發送(綁gametower會員帳號版)
 
