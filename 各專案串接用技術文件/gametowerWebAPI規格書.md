@@ -12,6 +12,7 @@
 | **1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
 | **1.51.1** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁 |
 | **1.52.0** | 2021/06/23 | 林子傑 | 新增六十三、取得會員白名單資訊 |
+| **1.52.1** | 2021/09/27 | 林宥良 | 1.修改11.遊戲內序號兌換道具API，新增回傳關聯活動名稱 ACTION_NAME |
 
 ## 1.說明
 
@@ -971,23 +972,24 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ```json
 {
-	"ReturnCode" :	處理結果代碼
-	"SUCCESS" :	前端顯示成功的訊息		// e.g. 恭喜您～領取成功！
-	"FAILED" :		前端顯示失敗的訊息
-		"GAIN_PRIZE_LIST" :  獎項清單		// e.g.
-									"GAIN_PRIZE_LIST" : [
+    "ReturnCode" :		處理結果代碼
+	"SUCCESS" :			前端顯示成功的訊息// e.g. 恭喜您～領取成功！
+    "FAILED" :			前端顯示失敗的訊息
+	"GAIN_PRIZE_LIST" : 獎項清單		// e.g.
+										"GAIN_PRIZE_LIST" : [
 										{
 											"ITEM_INDEX",			遊戲端道具編號的INDEX_NO
 											"AMOUNT",				獎項數量
-											"NAME",				獎品名稱
+											"NAME",					獎品名稱
 											"EXTRA_INDEX"			延伸INDEX_NO			
 										},
 										{
 											"ITEM_INDEX",			遊戲端道具編號的INDEX_NO
 											"AMOUNT",				獎項數量
-											"NAME",				獎品名稱
+											"NAME",					獎品名稱
 											"EXTRA_INDEX"			延伸INDEX_NO
 										}]
+	"ACTION_NAME" :		關聯活動名稱 		// e.g. 202109-明星3缺1-輔大迎新
 }
 ```
 
