@@ -522,11 +522,11 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | os              |          |                                          | 作業系統                                                     |
 | info            |          |                                          | 遊戲端對應LOG資訊                                            |
 | viplevel        |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
-| lang            |          | TW                                       | 多國語系規格，目前提供 TW、EN與CN，預設：TW                  |
+| lang            |          | TW                                       | 多國語系規格，目前提供 TW、CN、EN、JP、VN、ID，預設：TW      |
 | platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
 | IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | ※此參數預計2021/7/14更新至正式環境<BR><BR>智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
 | check_code      | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
-| 圖片            |          |                                          | 須透過FormData file upload，圖片不能超過5mb                  |
+| 圖片、影片      |          |                                          | 須透過FormData file upload，檔案大小不能超過10mb<br>圖片格式：PNG、JPG<br/>影片格式：MOV、MP4 |
 
 check_code範例程式如下
 
@@ -644,7 +644,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | l            | 20                                       | 每一頁的筆數，沒有傳入則不做分頁                             |
 | p            | 1                                        | 第幾頁，沒有傳入則不做分頁                                   |
 | status       |                                          | 指定回報紀錄的狀態                                           |
-| lan          | TW                                       | 非必填，為要顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN，預設為TW) |
+| lan          | TW                                       | 非必填，為要顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN、JP、VN、ID，預設為TW) |
 | platform     | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
 | check_code   | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 
@@ -1924,7 +1924,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | 參數名稱 | 規格   | 是否必填 | 描述                                                         |
 | -------- | ------ | -------- | ------------------------------------------------------------ |
 | game     | string | 是       | 遊戲代碼，關聯 GameTower_Member.FAQ_CLASS                    |
-| lan      | string | 否       | 顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN，預設為TW) |
+| lan      | string | 否       | 顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN、JP、VN、ID，預設為TW) |
 
 
 
@@ -2930,7 +2930,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | NICKNAME   | string  | 是       | 遊戲中暱稱，若MNO = 0的話，該值會成為查詢回報紀錄的KEY值，非gametower的遊戲可自行定義(EX:FAFAFA_{會員編號}) |
 | VL         | int     | 是       | VIP等級                                                      |
 | MEMO       | string  | 是       | 行動裝置的裝置資訊(OS版號、裝置別)、app版號...etc，方便客服找問題<br>若使用GET方式請將值做UrlEncode(產生CHECK_CODE時請使用Encode前的值去參與CHECK_CODE的產生) |
-| LAN        | string  | 否       | 語系 EX:TW or EN or CN，網頁會針對帶入的語系進行顯示上的語系切換，至於問題回報類別要支援多語系的規格需開工單製作 |
+| LAN        | string  | 否       | 語系 EX:TW、CN、EN、JP、VN、ID，網頁會針對帶入的語系進行顯示上的語系切換，至於問題回報類別要支援多語系的規格需開工單製作 |
 | PLATFORM   | int     | 是       | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
 | CHECK_CODE | string  | 是       | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 | UPLOAD     | Boolean |          | 否                                                           |
