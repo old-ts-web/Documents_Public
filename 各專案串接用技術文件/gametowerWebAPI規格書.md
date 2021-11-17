@@ -6,11 +6,10 @@
 | ---------- | ---------- | ------ | ------------------------------------------------------------ |
 | **1.0**    | 2015/10/16  | 魏嘉男 | 新建立文件                    |
 | (略)       |            |        |                                                              |
-| **1.51.0** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁gametower會員帳號) |
-| **1.51.1** | 2021/05/28 | 林子傑 | 1.修改 53.LINE Notify訊息發送(綁gametower會員帳號版)<br>2.修改 54.LINE Notify訊息發送(不需綁 |
 | **1.52.0** | 2021/06/23 | 林子傑 | 新增六十三、取得會員白名單資訊 |
 | **1.53.0** | 2021/09/10 | 林子傑 | 修改52.電信撥號(CallOut)服務API，新增 2.0 模式 |
 | **1.54.0** | 2021/09/27 | 林宥良 | 1.修改11.遊戲內序號兌換道具API，新增回傳關聯活動名稱 ACTION_NAME |
+| **1.55.0** | 2021/11/17 | 林子傑 | 1.修改60.儲值黑名單上限API |
 
 ## 1.說明
 
@@ -5135,7 +5134,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 | -------------- | ------------------------------------------------------------ |
 | RETURN_CODE    | 0：成功，其餘：失敗                                          |
 | RETURN_MESSAGE | 有錯誤時會有錯誤訊息                                         |
-| RESULT         | RETURN_CODE = 0 才會回傳，否則為nul<br>回傳以下參數<br>"IS_BLACK"  是否為黑名單(不是黑名單不擋)<br>"LIMIT_START"  儲值下限(是黑名單才會回傳此值)<br>"LIMIT_END"  儲值上限(是黑名單才會回傳此值)<br>"NEXT_SHOULD_SUCCESS"  是否可以成功(0 成功  -1 失敗)<br>"TOTAL_CREDIT"  期間已儲值總額(是黑名單才會回傳此值)<br>※ NEXT_SHOULD_SUCCESS 說明<br>回傳 0 : <br>  "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_START"   (不擋) <br>  "LIMIT_START" <= "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_END"   (不擋) <br>  "LIMIT_END" <= "TOTAL_CREDIT" + {玩家選擇的品項金額}   (阻擋) <br>回傳 1 : <br>  "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_START"   (不擋) <br>  "LIMIT_START" <= "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_END"   (阻擋) <br>  "LIMIT_END" <= "TOTAL_CREDIT" + {玩家選擇的品項金額}   (阻擋) |
+| RESULT         | RETURN_CODE = 0 才會回傳，否則為nul<br>回傳以下參數<br>"IS_BLACK"  是否為黑名單(不是黑名單不擋)<br>"LIMIT_START"  儲值下限(是黑名單才會回傳此值)<br>"LIMIT_END"  儲值上限(是黑名單才會回傳此值)<br>"NEXT_SHOULD_SUCCESS"  是否可以成功(0 成功  -1 失敗)<br>"TOTAL_CREDIT"  期間已儲值總額(是黑名單才會回傳此值)<br>※ NEXT_SHOULD_SUCCESS 說明<br>回傳 0 : <br>  "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_START"   (不擋) <br>  "LIMIT_START" <= "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_END"   (不擋) <br>  "LIMIT_END" <= "TOTAL_CREDIT" + {玩家選擇的品項金額}   (阻擋) <br>回傳 -1 : <br>  "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_START"   (不擋) <br>  "LIMIT_START" <= "TOTAL_CREDIT" + {玩家選擇的品項金額} < "LIMIT_END"   (阻擋) <br>  "LIMIT_END" <= "TOTAL_CREDIT" + {玩家選擇的品項金額}   (阻擋) |
 
 
 
