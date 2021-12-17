@@ -2693,9 +2693,9 @@ OR
 
 ## 33.簡訊發送 API
 
-驗證網址big5：<https://www.gt.web/common/receive/Phone/SendBulkSMS.aspx>
+驗證網址big5：<https://api.gt.web/common/receive/Phone/SendBulkSMS.aspx>
 
-驗證網址utf-8：<https://www.gt.web/common/receive/Phone/SendBulkSMS_UTF8.aspx>
+驗證網址utf-8：<https://api.gt.web/common/receive/Phone/SendBulkSMS_UTF8.aspx>
 
 | 環境 | API domain               |
 | ---- | ------------------------ |
