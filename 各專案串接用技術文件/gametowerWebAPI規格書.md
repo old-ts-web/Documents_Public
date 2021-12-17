@@ -6,11 +6,11 @@
 | ---------- | ---------- | ------ | ------------------------------------------------------------ |
 | **1.0**    | 2015/10/16  | 魏嘉男 | 新建立文件                    |
 | (略)       |            |        |                                                              |
-| **1.52.0** | 2021/06/23 | 林子傑 | 新增六十三、取得會員白名單資訊 |
 | **1.53.0** | 2021/09/10 | 林子傑 | 修改52.電信撥號(CallOut)服務API，新增 2.0 模式 |
 | **1.54.0** | 2021/09/27 | 林宥良 | 1.修改11.遊戲內序號兌換道具API，新增回傳關聯活動名稱 ACTION_NAME |
 | **1.55.0** | 2021/11/17 | 林子傑 | 1.修改60.儲值黑名單上限API |
 | **1.56.0** | 2021/12/14 | 吳志豪 | 1.修改問題回報相關API資訊 |
+| **1.57.0** | 2021/12/17 | 林子傑 | 1.修改33.簡訊發送 API |
 
 ## 1.說明
 
@@ -2693,9 +2693,15 @@ OR
 
 ## 33.簡訊發送 API
 
-驗證網址big5：<https://admin.gt.web/common/receive/Phone/SendBulkSMS.aspx>
+驗證網址big5：<https://www.gt.web/common/receive/Phone/SendBulkSMS.aspx>
 
-驗證網址utf-8：<https://admin.gt.web/common/receive/Phone/SendBulkSMS_UTF8.aspx>
+驗證網址utf-8：<https://www.gt.web/common/receive/Phone/SendBulkSMS_UTF8.aspx>
+
+| 環境 | API domain               |
+| ---- | ------------------------ |
+| 開發 | www.gt.web               |
+| 測試 | www-twtest.towergame.com |
+| 正式 | api.gametower.com.tw     |
 
 1.若要發送國外簡訊應改使用 SendBulkSMS_UTF8.aspx
 
