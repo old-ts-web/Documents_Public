@@ -2699,8 +2699,8 @@ OR
 
 | 環境 | API domain               |
 | ---- | ------------------------ |
-| 開發 | www.gt.web               |
-| 測試 | www-twtest.towergame.com |
+| 開發 | api.gt.web               |
+| 測試 | api-twtest.towergame.com |
 | 正式 | api.gametower.com.tw     |
 
 1.若要發送國外簡訊應改使用 SendBulkSMS_UTF8.aspx
