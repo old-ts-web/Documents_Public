@@ -6,13 +6,11 @@
 | ---------- | ---------- | ------ | ------------------------------------------------------------ |
 | **1.0**    | 2015/10/16  | 魏嘉男 | 新建立文件                    |
 | (略)       |            |        |                                                              |
-| **1.53.0** | 2021/09/10 | 林子傑 | 修改52.電信撥號(CallOut)服務API，新增 2.0 模式 |
 | **1.54.0** | 2021/09/27 | 林宥良 | 1.修改11.遊戲內序號兌換道具API，新增回傳關聯活動名稱 ACTION_NAME |
 | **1.55.0** | 2021/11/17 | 林子傑 | 1.修改60.儲值黑名單上限API |
 | **1.56.0** | 2021/12/14 | 吳志豪 | 1.修改問題回報相關API資訊 |
 | **1.57.0** | 2021/12/17 | 林子傑 | 1.修改33.簡訊發送 API |
-
-## 1.說明
+| **1.58.0** | 2021/12/22 | 林子傑 | 1.新增64.Firebasem預約推播 API |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -5307,7 +5305,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 }
 ```
 
-## 62.Firebase訊息推播 token 蒐集 API網址
+## 62.Firebase訊息推播 token 蒐集 API
 
 開發：http://message.gt.web/Firebase/AddUser.aspx
 
@@ -5459,6 +5457,92 @@ LF=TOKEN_DETAIL,SUBSCRIBED_TOPICS
   "RETURN_CODE": -2,
   "RETURN_MESSAGE": "會員資料庫連線失敗",
   "RESULT": null
+}
+```
+
+## 64.Firebasem預約推播 API
+
+開發：http://message.gt.web/Firebase/PushNotify.aspx
+
+測試：https://message-twtest.towergame.com/Firebase/PushNotify.aspx
+
+正式：https://message.gametower.com.tw/Firebase/PushNotify.aspx
+
+> 功能描述
+>
+> 預約推播發送(主題 or 指定用戶名單)<br>(有被蒐集的用戶，才可透過此 API 進行指定用戶名單推播)
+
+傳遞參數方式：
+
+| Request Header |      |
+| -------------- | ---- |
+| HTTP Method    | POST |
+
+需要參數：
+
+| 參數名稱        | 規格   | 是否必填                | 描述                                                         |
+| --------------- | ------ | ----------------------- | ------------------------------------------------------------ |
+| PID             | string | 是                      | 專案 ID (申請串接時由網頁組提供)                             |
+| ACC             | string | 和 TOPIC 擇一           | 會員識別值(多組以逗號分隔)<br>要和 62.Firebase訊息推播 token 蒐集 API 傳入的 ACC 一致 |
+| TOPIC           | string | 和 ACC 擇一             | 主題                                                         |
+| TITLE           | string | 是                      | 標題                                                         |
+| CONTENT         | string | 是                      | 內文                                                         |
+| START_TIME      | string | 否                      | 預定發送時間(格式 yyyy/MM/dd HH:mm)，因網頁排程 5 分鐘一次，會自動 round up 到最近一個 5 分點(沒填也是) |
+| REPEAT_COUNT    | int    | 是                      | 重複次數，1 為只發一次                                       |
+| MINUTE_INTERVAL | int    | REPEAT_COUNT > 1 時必填 | 重複間隔(分鐘)，須為 5 的倍數                                |
+| PLATFORM        | int    | 有 ACC 時必填           | 裝置平台 (0：全部，13：安卓，14：iOS)                        |
+| IMAGE_URL       | string | 否                      | 圖片網址                                                     |
+| SOUND           | string | 否                      | 音效                                                         |
+| CHECK_CODE      | string | 必填                    | 將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1 加密而成<br/>※要轉大寫 |
+
+CHECK_CODE範例程式如下
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+
+     // 依照 Key 排序，將所有 Value 相加 (排除 CHECK_CODE 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+         if (!strKey.Equals("CHECK_CODE",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+
+     return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA1") ;
+}
+
+```
+
+回傳參數說明：
+
+| 值             | 說明                 |
+| -------------- | -------------------- |
+| RETURN_CODE    | 0：成功，其餘：失敗  |
+| RETURN_MESSAGE | 有錯誤時會有錯誤訊息 |
+| RESULT         | 目前固定回空 {}      |
+
+
+
+回傳格式：
+
+```json
+{
+  "RETURN_CODE": 0,
+  "RETURN_MESSAGE": "success",
+  "RESULT": {}
+}
+```
+
+失敗範例
+
+```json
+{
+  "RETURN_CODE": -4,
+  "RETURN_MESSAGE": "CHECK_CODE invalid",
+  "RESULT": {}
 }
 ```
 
