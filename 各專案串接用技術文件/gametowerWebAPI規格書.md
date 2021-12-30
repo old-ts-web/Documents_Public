@@ -5526,6 +5526,18 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 
 
+範例參數(key 為測試環境)：
+
+```json
+ACC				= 716434
+CHECK_CODE		= EE486FE6A49BB2EA63D10F3151F5B495654FA38D
+CONTENT			= 測試內文
+PID				= WE5
+PLATFORM		= 0
+REPEAT_COUNT	= 1
+TITLE			= 測試標題
+```
+
 回傳格式：
 
 ```json
