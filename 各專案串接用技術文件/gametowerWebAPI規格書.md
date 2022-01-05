@@ -11,6 +11,7 @@
 | **1.56.0** | 2021/12/14 | 吳志豪 | 1.修改問題回報相關API資訊 |
 | **1.57.0** | 2021/12/17 | 林子傑 | 1.修改33.簡訊發送 API |
 | **1.58.0** | 2021/12/22 | 林子傑 | 1.新增64.Firebasem預約推播 API |
+| **1.59.0** | 2022/01/05 | 吳志豪 | 1.修改『7.新增問題回報API』與『8.取得問題回報API』<br />2.新增『65.作廢刪除會員之問題回報紀錄API』 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -524,20 +525,21 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | 參數            | 是否必填 | 值範例                                   | 說明                                                         |
 | --------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
 | game            | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
-| class_no        | V        | 138                                      | 可使用『取得問題回報分類』API取得                            |
+| class_no        | V        | 138                                      | 可使用『取得問題回報分類』API取得<br />若為申請刪除帳號的請傳入0 |
 | member_no       | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
 | username        | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
 | email           | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
 | phone           |          | 0987654321                               | 電話                                                         |
-| message         | V        | 測試訊息                                 | 回報內容                                                     |
+| message         | V        | 測試訊息                                 | 回報內容<br />若為申請刪除帳號的請將帶入該玩家儲值狀況以便客服參考 |
 | uni_business    | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
 | os              |          |                                          | 作業系統                                                     |
 | info            |          |                                          | 遊戲端對應LOG資訊                                            |
 | viplevel        |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
 | lang            |          | TW                                       | 多國語系規格，目前提供 TW、CN、EN、TH、JP、VN、ID，預設：TW  |
-| platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
-| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | ※此參數預計2021/7/14更新至正式環境<BR><BR>智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
-| check_code      | V        | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
+| platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
+| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | 智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
+| IsDeleteAccount |          | TRUE                                     | TRUE OR FALSE<br />是否為申請刪除帳號<br />若為遊戲內刪除功能要使用的話請傳入TRUE<br />※此參數預計2022/01/26 12:00上線 |
+| check_code      | V        | FEB5FF5F64938A51D5B10102840B17BA0CE8BBA8 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 | 圖片、影片      |          |                                          | 須透過FormData file upload，檔案大小不能超過10mb<br>圖片格式：PNG、JPG<br/>影片格式：MOV、MP4 |
 
 check_code範例程式如下
@@ -622,10 +624,11 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 -18 = 請勿選擇多個圖檔
 
 -19 = 請勿選擇超過5個圖檔
+-20 = 非預期錯誤
 
 
 
-## 8.取得問題回報
+## 8.取得問題回報API
 
 驗證網址：<http://www.gt.web/common/receive/BugReport/GetRecord.aspx>
 
@@ -633,7 +636,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 | Request Header |                       |
 | -------------- | --------------------- |
-| HTTP Method    | POST                  |
+| HTTP Method    | GET                   |
 | Content Type   | x-www-form-urlencoded |
 
 
@@ -658,19 +661,20 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 
 需要參數：
 
-| 參數         | 值範例                                   | 說明                                                         |
-| ------------ | ---------------------------------------- | ------------------------------------------------------------ |
-| game         | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
-| memberno     | 764466                                   | 會員編號                                                     |
-| username     | hsiehld                                  | 會員名稱或識別值                                             |
-| uni_business | 22                                       | 傳入 all來取得全部                                           |
-| en           | 20                                       | 指定特定編號的紀錄                                           |
-| l            | 20                                       | 每一頁的筆數，沒有傳入則不做分頁                             |
-| p            | 1                                        | 第幾頁，沒有傳入則不做分頁                                   |
-| status       |                                          | 指定回報紀錄的狀態                                           |
-| lan          | TW                                       | 非必填，為要顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN、TH、JP、VN、ID，預設為TW) |
-| platform     | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO 例如 5 為 APPPORTAL_PAYCENTER 行動平台 |
-| check_code   | A9CD853C70FE32B57FC24DB8C1D285F9751A9648 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
+| 參數                 | 是否必填 | 值範例                                   | 說明                                                         |
+| -------------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
+| game                 | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
+| memberno             | V        | 764466                                   | 會員編號                                                     |
+| username             | V        | hsiehld                                  | 會員名稱或識別值                                             |
+| uni_business         | V        | 22                                       | 傳入 all來取得全部<br />0 = gametower 未登入<br/>1 = gametower<br/>97 = 隨你玩 (VIP專屬購點申請) <br/>98 = 隨你玩 (尊榮服務鈴) <br/>99 = gametower 遊戲端<br/>22 = 行動平台<br/><br/>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
+| en                   |          | 20                                       | 指定特定編號的紀錄                                           |
+| l                    |          | 20                                       | 每一頁的筆數，沒有傳入則不做分頁                             |
+| p                    |          | 1                                        | 第幾頁，沒有傳入則不做分頁                                   |
+| status               |          |                                          | 指定回報紀錄的狀態<br />2：未處理 4：處理中  6：已退件 8：已回信 |
+| lan                  |          | TW                                       | 非必填，為要顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN、TH、JP、VN、ID，預設為TW) |
+| platform             | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
+| IsCheckDeleteAcoount |          | TRUE                                     | TRUE OR FALSE<br />是否為要查詢是否有申請刪除帳號的紀錄<br />※此參數預計2022/01/26 12:00上線 |
+| check_code           | V        | 4B33FBFD1A8B196612343BC6778BDBD985D38B05 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 
 
 check_code範例程式如下
@@ -5558,5 +5562,110 @@ TITLE			= 測試標題
 }
 ```
 
-## 
+## 65.作廢刪除會員之問題回報紀錄API
+
+各環境Domain：
+
+​	開發環境：cs-api.gt.web
+
+​	測試環境：cs-api-twtest.towergame.com
+
+​	正式環境：cs-api.gametower.com.tw
+
+驗證網址：
+
+​	https://{對應環境Domain}/cancel-delete-account-apply
+
+​	※正式環境預計2022/01/26 12:00 上線
+
+傳遞參數方式：
+
+| Request Header |                       |
+| -------------- | --------------------- |
+| HTTP Method    | POST                  |
+| Content Type   | x-www-form-urlencoded |
+
+需要參數：
+
+| 參數名稱  | 型別   | 長度 | 是否必填 | 預設值 | 說明                                                         |
+| --------- | ------ | ---- | -------- | ------ | ------------------------------------------------------------ |
+| Game      | string | 50   | 是       | 無     | GameTower_Member.FAQ_Class 的遊戲別                          |
+| MemberNo  | int    |      | 是       | 無     | 建立問題回報所傳入的member_no                                |
+| UserName  | string | 30   | 是       | 無     | 建立問題回報所傳入的username                                 |
+| platform  | int    |      | 是       | 無     | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
+| CheckCode | String | -    | 是       | 無     | CheckCode計算方式是將傳送的參數資料依照 Key 排序，<BR>將所有 Value 相加(排除 CheckCode 參數)，<BR>最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA512加密並轉成大寫而成。 |
+
+
+check_code範例程式如下
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+    
+     // 依照 Key 排序，將所有 Value 相加 (排除 CheckCode 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+     	if (!strKey.Equals("CheckCode",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+    
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+    
+	 return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA512") ;
+}
+
+```
+
+回傳結果：
+
+| 參數           | 說明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| RETURN_CODE    | 等於 0 時為成功，負值為失敗                                  |
+| RETURN_MESSAGE | 回傳結果訊息(若RETURN_CODE = 0 則回傳 "成功"，反之則回傳提供適合前端使用者觀看的錯誤訊息) |
+| RESULT         | 若RETURN_CODE = 0 則提供各狀態筆數及資料，反之則回傳NULL     |
+
+錯誤代碼表：
+
+| 代碼 | 說明                                                |
+| ---- | --------------------------------------------------- |
+| 0    | 成功                                                |
+| 1001 | 缺少必要參數                                        |
+| 1002 | 參數值錯誤或格式不正確                              |
+| 1003 | 請求傳送的格式或內容有誤                            |
+| 1004 | 在一定時間內訪問次數已達上限                        |
+| 1005 | 無對應資料                                          |
+| 1006 | 資料已存在                                          |
+| 1007 | 綁定屬性失敗                                        |
+| 2001 | 不允許的上傳檔案類型                                |
+| 2003 | 此環境不允許操作                                    |
+| 2004 | 沒有上傳檔案                                        |
+| 3001 | 登入失敗                                            |
+| 9000 | 自定義失敗<br />對應的Message內容為客製化的訊息內容 |
+| 9001 | WebAPI 服務不存在                                   |
+| 9002 | 系統異常                                            |
+| 9003 | 系統維護中                                          |
+| 9004 | 未知的錯誤                                          |
+| 9005 | 驗證失敗                                            |
+| 9006 | 伺服器連線失敗                                      |
+| 9007 | 連線逾時                                            |
+| 9008 | 權限不足                                            |
+| 9100 | 連線逾時(9100)                                      |
+| 9101 | 連線逾時(9101)                                      |
+| 9104 | 連線逾時(9104)                                      |
+
+成功範例：
+
+```json
+{"Code":"0","Message":"成功","Data":null}
+```
+
+失敗範例：
+
+```json
+{"Code":"1001","Message":"缺少必要參數","Data":null}
+```
+
+
 
