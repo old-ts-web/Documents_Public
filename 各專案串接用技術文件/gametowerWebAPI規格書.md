@@ -524,7 +524,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 
 | 參數            | 是否必填 | 值範例                                   | 說明                                                         |
 | --------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
-| game            | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
+| game            | V        | STAR31                                   | GameTower_Member.FAQ_Class 的 CLASS_ID<br />也就是既有串接問題回報的CID參數 |
 | class_no        | V        | 138                                      | 可使用『取得問題回報分類』API取得<br />若為申請刪除帳號的請傳入0 |
 | member_no       | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
 | username        | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
@@ -663,7 +663,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 
 | 參數                 | 是否必填 | 值範例                                   | 說明                                                         |
 | -------------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
-| game                 | V        | STAR31                                   | GameTower_Member.FAQ_Class 的遊戲別                          |
+| game                 | V        | STAR31                                   | GameTower_Member.FAQ_Class 的 CLASS_ID<br />也就是既有串接問題回報的CID參數 |
 | memberno             | V        | 764466                                   | 會員編號                                                     |
 | username             | V        | hsiehld                                  | 會員名稱或識別值                                             |
 | uni_business         | V        | 22                                       | 傳入 all來取得全部<br />0 = gametower 未登入<br/>1 = gametower<br/>97 = 隨你玩 (VIP專屬購點申請) <br/>98 = 隨你玩 (尊榮服務鈴) <br/>99 = gametower 遊戲端<br/>22 = 行動平台<br/><br/>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
@@ -5587,13 +5587,32 @@ TITLE			= 測試標題
 
 需要參數：
 
-| 參數名稱  | 型別   | 長度 | 是否必填 | 預設值 | 說明                                                         |
-| --------- | ------ | ---- | -------- | ------ | ------------------------------------------------------------ |
-| Game      | string | 50   | 是       | 無     | GameTower_Member.FAQ_Class 的遊戲別                          |
-| MemberNo  | int    |      | 是       | 無     | 建立問題回報所傳入的member_no                                |
-| UserName  | string | 30   | 是       | 無     | 建立問題回報所傳入的username                                 |
-| platform  | int    |      | 是       | 無     | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
-| CheckCode | String | -    | 是       | 無     | CheckCode計算方式是將傳送的參數資料依照 Key 排序，<BR>將所有 Value 相加(排除 CheckCode 參數)，<BR>最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA512加密並轉成大寫而成。 |
+| 參數名稱         | 型別   | 長度 | 是否必填 | 預設值 | 說明                                                         |
+| ---------------- | ------ | ---- | -------- | ------ | ------------------------------------------------------------ |
+| BugReportClassID | string | 50   | 是       | 無     | GameTower_Member.FAQ_Class 的 CLASS_ID<br />也就是既有串接問題回報的CID參數 |
+| MemberNo         | int    |      | 是       | 無     | 建立問題回報所傳入的member_no                                |
+| UserName         | string | 30   | 是       | 無     | 建立問題回報所傳入的username                                 |
+| PlatformId       | int    |      | 是       | 無     | 服務中心專案代碼，請參考下方表格                             |
+| CheckCode        | String | -    | 是       | 無     | CheckCode計算方式是將傳送的參數資料依照 Key 排序，<BR>將所有 Value 相加(排除 CheckCode 參數)，<BR>最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA512加密並轉成大寫而成。 |
+
+服務中心專案對照表：
+
+| 名稱                 | 專案代碼     |
+| -------------------- | ------------ |
+| gametower            | GT           |
+| 金好運娛樂城         | PANTHER      |
+| 滿貫大亨             | TMD          |
+| 明星3缺1 AIO         | STAR31       |
+| 金好運娛樂城JP       | KARASU       |
+| 金好運娛樂城MY       | TAPIRUS      |
+| 愛一起遊戲           | I17GAME      |
+| 金猴爺(FaFaFa Slots) | FAFAFA_SLOTS |
+| 金虎爺WEB金流平台    | GT_SLOTS     |
+| 唯舞獨尊online       | WE5          |
+| 海王嘉年華           | OKC          |
+| 三國戰紀             | YAK          |
+| 商用平台測試專案     | KOVTW        |
+| 撞球好手 - 勝者為王  | POOL_ACE     |
 
 
 check_code範例程式如下
