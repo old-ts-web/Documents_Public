@@ -5592,7 +5592,7 @@ TITLE			= 測試標題
 | BugReportClassID | string | 50   | 是       | 無     | GameTower_Member.FAQ_Class 的 CLASS_ID<br />也就是既有串接問題回報的CID參數 |
 | MemberNo         | int    |      | 是       | 無     | 建立問題回報所傳入的member_no                                |
 | UserName         | string | 30   | 是       | 無     | 建立問題回報所傳入的username                                 |
-| PlatformId       | int    |      | 是       | 無     | 服務中心專案代碼，請參考下方表格                             |
+| ProjectId        | int    |      | 是       | 無     | 服務中心專案代碼，請參考下方表格                             |
 | CheckCode        | String | -    | 是       | 無     | CheckCode計算方式是將傳送的參數資料依照 Key 排序，<BR>將所有 Value 相加(排除 CheckCode 參數)，<BR>最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA512加密並轉成大寫而成。 |
 
 服務中心專案對照表：
@@ -5613,6 +5613,7 @@ TITLE			= 測試標題
 | 三國戰紀             | YAK          |
 | 商用平台測試專案     | KOVTW        |
 | 撞球好手 - 勝者為王  | POOL_ACE     |
+| SlotTrip             | SC           |
 
 
 check_code範例程式如下
