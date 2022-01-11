@@ -5582,7 +5582,7 @@ TITLE			= 測試標題
 
 | Request Header |                       |
 | -------------- | --------------------- |
-| HTTP Method    | POST                  |
+| HTTP Method    | PUT                   |
 | Content Type   | x-www-form-urlencoded |
 
 需要參數：
