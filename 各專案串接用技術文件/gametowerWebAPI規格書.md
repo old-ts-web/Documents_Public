@@ -12,6 +12,7 @@
 | **1.57.0** | 2021/12/17 | 林子傑 | 1.修改33.簡訊發送 API |
 | **1.58.0** | 2021/12/22 | 林子傑 | 1.新增64.Firebasem預約推播 API |
 | **1.59.0** | 2022/01/05 | 吳志豪 | 1.修改『7.新增問題回報API』與『8.取得問題回報API』<br />2.新增『65.作廢刪除會員之問題回報紀錄API』 |
+| **1.60.0** | 2022/01/20 | 吳志豪 | 1.修改『8.取得問題回報API』的 IsCheckDeleteAccount 參數命名 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -674,7 +675,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | status               |          |                                          | 指定回報紀錄的狀態<br />2：未處理 4：處理中  6：已退件 8：已回信 |
 | lan                  |          | TW                                       | 非必填，為要顯示的語系，關聯 GameTower_Member.dbo.CODE_Language.ID<br>(EX：TW、CN、EN、TH、JP、VN、ID，預設為TW) |
 | platform             | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
-| IsCheckDeleteAcoount |          | TRUE                                     | TRUE OR FALSE<br />是否為要查詢是否有申請刪除帳號的紀錄<br />※此參數預計2022/01/26 12:00上線 |
+| IsCheckDeleteAccount |          | TRUE                                     | TRUE OR FALSE<br />是否為要查詢是否有申請刪除帳號的紀錄<br />※此參數預計2022/01/26 12:00上線 |
 | check_code           | V        | 4B33FBFD1A8B196612343BC6778BDBD985D38B05 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 
 
