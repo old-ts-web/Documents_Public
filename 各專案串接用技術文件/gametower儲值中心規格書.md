@@ -359,7 +359,7 @@ https://bank-twtest.towergame.com/user/invoicelist.aspx?PLATFORM=GT&IDENTITY_1=1
 | ------------------------------------------------------------ |
 | 將使用者透過 Url Get 前往<br/>測試機：https://bank-twtest.towergame.com/user/selectinvoice.aspx<br/>正式機：https://bank.gametower.com.tw/user/selectinvoice.aspx |
 
-### (十二)歸戶
+### (十二)發票歸戶
 
 | 電文參數說明                                                 |
 | ------------------------------------------------------------ |
@@ -393,7 +393,7 @@ https://bank-twtest.towergame.com/user/carrier.aspx?PLATFORM=GT&RETURN_URL=https
 | RESULT_MESSAGE | nvarchar(200) | 是   | 回覆結果訊息                 |
 | CHECK_CODE     | char(40)      | 是   | 驗證碼                       |
 
-### (十三)修改電子發票預設值
+### (十三)修改發票預設值
 
 | 電文參數說明                                                 |
 | ------------------------------------------------------------ |
