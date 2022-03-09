@@ -10,7 +10,7 @@
 | **1.62.0** | 2021/11/29 | 吳志豪 | (1)調整 五.各付費方式延伸欄位說明表內閃快 – 支付寶儲值的<br /> (一)提出交易請求電文、(三) 交易結果電文、(四) 交易回報確認電文資訊內容 |
 | **1.63.0** | 2021/12/08 | 吳志豪 | (1)調整 回覆結果訊息表中000002與000003的順序 |
 | **1.64.0** | 2021/12/29 | 林子傑 | (1)四.付款方式代碼表新增 MyCard轉點<br/>(2)五.各付費方式延伸欄位說明新增 MyCard轉點 |
-| **1.65.0** | 2021/12/29 | 林子傑 | (1)新增八.發票紀錄、歸戶相關 |
+| **1.65.0** | 2021/12/29 | 林子傑 | (1)三.溝通電文格式新增發票設定、歸戶相關 |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -72,7 +72,7 @@
 
 適用付費平台：需要發票資訊的付費方式(詳見【四、付款方式代碼表】)。
 
-![image-20210303164335935](images/image-20210303164335935.png)
+![image-20220309160437824](images/image-20220309160437824.png)
 
 ## 二.溝通電文說明
 
@@ -285,6 +285,10 @@
 正式機：https://bank.gametower.com.tw/user/invoicelist.aspx
 ```
 
+測試機範例：
+
+https://bank-twtest.towergame.com/user/invoicelist.aspx?PLATFORM=GT&IDENTITY_1=1983052&IDENTITY_2=jjj207&CHECK_CODE=D1479FF980744D4FF7D3B39FACD34B0B53A4F9A2&BC_CUSTOMIZE_InvoicePayType=100021
+
 ### (九)查詢訂單交易結果請求
 
 | (九) 查詢訂單交易結果參數說明                                |
@@ -348,6 +352,68 @@
 | PLATFORM_TRANS_NO | varchar(50)    | 否   | 廠商訂單編號                        |
 | CENTER_TRANS_NO   | char(19)       | 否   | 儲值中心訂單編號                    |
 | EXTEND            | 無長度限制     | 否   | 延伸欄位                            |
+
+### (十一)發票選擇差異說明
+
+| 電文參數說明                                                 |
+| ------------------------------------------------------------ |
+| 將使用者透過 Url Get 前往<br/>測試機：https://bank-twtest.towergame.com/user/selectinvoice.aspx<br/>正式機：https://bank.gametower.com.tw/user/selectinvoice.aspx |
+
+### (十二)歸戶
+
+| 電文參數說明                                                 |
+| ------------------------------------------------------------ |
+| 將使用者透過 Url Get 前往<br>測試機：https://bank-twtest.towergame.com/user/carrier.aspx<br/>正式機：https://bank.gametower.com.tw/user/carrier.aspx |
+
+| 參數名稱   | 參數大小     | 必要 | 説明                                                         |
+| ---------- | ------------ | ---- | ------------------------------------------------------------ |
+| PLATFORM   | varchar(15)  | 是   | 廠商ID                                                       |
+| IDENTITY_1 | varchar(100) | 是   | 使用者識別值_1                                               |
+| IDENTITY_2 | varchar(100) | 是   | 使用者識別值_2                                               |
+| RETURN_URL | varchar(255) | 是   | 歸戶完成通知網址 (有歸戶結果會背景通知此網址)<br>規格見(四)歸戶完成通知 |
+| EXTEND     | 無長度限制   | 否   | PLATFORM=GT 時要帶入 CARRIER_ID 作為用戶識別<br>其他 PLATFORM 不用傳入此參數 |
+| CHECK_CODE | char(40)     | 是   | 驗證碼                                                       |
+
+測試機範例：
+
+https://bank-twtest.towergame.com/user/carrier.aspx?PLATFORM=GT&RETURN_URL=https%3A%2F%2Fwww-twtest.towergame.com%2Fcommon%2Freceive%2Finvoice%2FCentralizedSettle.aspx&IDENTITY_1=1983052&IDENTITY_2=jjj207&EXTEND=CARRIER_ID%3DAH1VXRJJH8FEL6F1&CHECK_CODE=A0EBAD93B77CF0B555BD804738BB4783D30C7949
+
+**RETURN_URL 儲值中心回覆參數**
+
+| 電文參數說明                           |
+| -------------------------------------- |
+| 將歸戶結果透過 form post 到 RETURN_URL |
+
+| 參數名稱       | 參數大小      | 必要 | 説明                         |
+| -------------- | ------------- | ---- | ---------------------------- |
+| PLATFORM       | varchar(15)   | 是   | 廠商ID                       |
+| IDENTITY_1     | varchar(100)  | 是   | 使用者識別值_1               |
+| IDENTITY_2     | varchar(100)  | 是   | 使用者識別值_2               |
+| RESULT_CODE    | varchar(6)    | 是   | 回覆結果代號 (000000 為成功) |
+| RESULT_MESSAGE | nvarchar(200) | 是   | 回覆結果訊息                 |
+| CHECK_CODE     | char(40)      | 是   | 驗證碼                       |
+
+### (十三)修改電子發票預設值
+
+| 電文參數說明                                                 |
+| ------------------------------------------------------------ |
+| 可修改發起交易時，預設帶入的電子發票資料，將使用者透過 form post 前往<br>測試機：https://bank-twtest.towergame.com/user/SetInvoice.aspx<br/>正式機：https://bank.gametower.com.tw/user/SetInvoice.aspx |
+
+| 參數名稱   | 參數大小     | 必要 | 説明           |
+| ---------- | ------------ | ---- | -------------- |
+| PLATFORM   | varchar(15)  | 是   | 廠商ID         |
+| IDENTITY_1 | varchar(100) | 是   | 使用者識別值_1 |
+| IDENTITY_2 | varchar(100) | 是   | 使用者識別值_2 |
+| RETURN_URL | varchar(255) | 是   | 設定完返回網址 |
+| CHECK_CODE | char(40)     | 是   | 驗證碼         |
+
+測試機範例：
+
+PLATFORM=GT
+IDENTITY_1=1983052
+IDENTITY_2=jjj207
+RETURN_URL=https://www-twtest.towergame.com/Member/index.aspx
+CHECK_CODE=9DE14AD6D3E21DF14891C7E1503CD55D82A0F8DB
 
 ## 四.付款方式代碼表
 
