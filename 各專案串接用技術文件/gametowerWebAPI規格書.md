@@ -13,6 +13,7 @@
 | **1.59.0** | 2022/01/05 | 吳志豪 | 1.修改『7.新增問題回報API』與『8.取得問題回報API』<br />2.新增『65.作廢刪除會員之問題回報紀錄API』 |
 | **1.60.0** | 2022/01/20 | 吳志豪 | 1.修改『8.取得問題回報API』的 IsCheckDeleteAccount 參數命名 |
 | **1.61.0** | 2022/02/10 | 林子傑 | 1.修改33.簡訊發送 API |
+| **1.62.0** | 2022/03/15 | 吳志豪 | 1.修改『8.取得問題回報API』新增回傳資訊相關說明並加上產生check_code注意事項 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -544,7 +545,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | check_code      | V        | FEB5FF5F64938A51D5B10102840B17BA0CE8BBA8 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 | 圖片、影片      |          |                                          | 須透過FormData file upload，檔案大小不能超過10mb<br>圖片格式：PNG、JPG<br/>影片格式：MOV、MP4 |
 
-check_code範例程式如下
+check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
 
 ```c#
 public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
@@ -679,7 +680,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | check_code           | V        | 4B33FBFD1A8B196612343BC6778BDBD985D38B05 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 
 
-check_code範例程式如下
+check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
 
 ```c#
 public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
@@ -762,6 +763,32 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 	}
 }
 ```
+
+RESULT內容規格說明：
+
+| 回傳值      | 說明         | 型態  | 範例                                                         |
+| ----------- | ------------ | ----- | ------------------------------------------------------------ |
+| TOTAL       | 總筆數       | int   | 7                                                            |
+| UNPROCESSED | 未處理筆數   | int   | 3                                                            |
+| PROCESSING  | 處理中筆數   | int   | 1                                                            |
+| PROCESSED   | 已回覆筆數   | int   | 2                                                            |
+| RETURNED    | 已退件筆數   | int   | 1                                                            |
+| RECORDS     | 回報紀錄List | Array | {<br/>	"INDEX_NO":"602",<br/>	"CLASS_NAME":"5.遊戲設定相關問題",<br/>	"PROCESS_STATUS":"已完成",<br/>	"REPORT_MESSAGE":"伺服器：\r\n角色名稱：\r\n發生時間：\r\n問題描述：wqdqd\r\n手機型號：",<br/>	"REPLY_MESSAGE":"QQ",<br/>	"C_DATETIME":"2015/06/08 17:43:36",<br/>	"CLASS_NO":"558",<br/>	"PROCESS_STATUS_CODE":"8",<br/>	"SCORE_OPTIONS":"",<br/>	"PROCESS_DATETIME":"2015/06/10 10:55:34"<br/>}<br />※詳細規格請參考下表 |
+
+回報紀錄List規格說明：
+
+| 回傳值              | 說明                                       | 型態   | 範例                                                         |
+| ------------------- | ------------------------------------------ | ------ | ------------------------------------------------------------ |
+| INDEX_NO            | 問題回報案件流水號                         | int    | 602                                                          |
+| CLASS_NAME          | 問題分類中文說明                           | string | 5.遊戲設定相關問題                                           |
+| PROCESS_STATUS      | 處理狀態中文說明                           | string | 已完成                                                       |
+| REPORT_MESSAGE      | 回報內容                                   | string | 伺服器：\r\n角色名稱：\r\n發生時間：\r\n問題描述：wqdqd\r\n手機型號： |
+| REPLY_MESSAGE       | 客服回覆內容                               | string | Test                                                         |
+| C_DATETIME          | 回報紀錄List                               | string | 2015/06/10 10:55:34                                          |
+| CLASS_NO            | 問題分類編號                               | int    | 558                                                          |
+| PROCESS_STATUS_CODE | 處理狀態編號                               | int    | 8                                                            |
+| SCORE_OPTIONS       | 基本評價<br />0:非常滿意、1:尚可、2:不滿意 | int    | 0                                                            |
+| PROCESS_DATETIME    | 回覆時間                                   | string | 2015/06/10 10:55:34                                          |
 
 失敗時：
 
