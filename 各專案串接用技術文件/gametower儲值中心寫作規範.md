@@ -26,7 +26,7 @@
    }
    ```
 
-3. 接收第三方金流商的參數是否有經過「驗證碼檢查」，沒有的話一定要經過「查詢訂單Api」
+3. 接收第三方金流商的參數是否有經過「驗證碼檢查」
 
    ```c#
    string	q_strSignature		= "接收的驗證碼" ;
@@ -38,7 +38,7 @@
    }
    ```
 
-4. 第三方金流商有「查詢訂單Api」，一律以「查詢訂單Api」為準
+4. 第三方金流商有「查詢訂單Api」，交易狀態碼一律以「查詢訂單Api」為準
 
    ```c#
    string	strQueryUrl = "查詢訂單Api位置"
@@ -53,14 +53,14 @@
 5. 若是第三方金流商的Api安全性不夠，提出建議不要串接
 
    ```c#
-   安全性不夠的範例
-   1.直接將key帶到網址(or Post)上，並且沒有對參數做運算 (甚至沒有Key)
+   安全性考量參考以下
+   1.是否直接將key帶到網址(or Post)上，並且沒有對參數做運算 (甚至沒有Key)
      // 安全性不夠範例1:Settle.aspx?id=A00001&Result=Success&Key=EFWF@#@FFFF
      // 安全性不夠範例2:Settle.aspx?id=A00001&Result=Success
      // 有驗證碼範例:Settle.aspx?id=A00001&Result=Success&CheckCode=ABCDEFGHIJKLMNABCDEFGHIJKLMN==
    2.沒有提供「查詢訂單Api」可以進行驗證
-     PS.若有「查詢訂單Api」可以驗證，那參數沒有key也沒關係，但是不能直接拿參數的Result來用
-   3.弱勢
+   3.若有「查詢訂單Api」可以驗證，那參數沒有key也沒關係，但是不能直接拿參數的Result來用
+   4.若是沒有「驗證碼檢查」與「查詢訂單Api」，看是否有其他補強措施，例如一定是從廠商Server端呼叫並鎖定IP
    ```
 
    檢查重複交易改成呼叫 CheckRejectTransaction()
@@ -138,6 +138,8 @@
    {
        bGetSettleType							= true ;
    }
+   
+   // 若bGetSettleType=true，就不會再次更新訂單，直接回傳已知結果
    ```
 
    
