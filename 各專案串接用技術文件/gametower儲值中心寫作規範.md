@@ -63,7 +63,7 @@
    4.若是沒有「驗證碼檢查」與「查詢訂單Api」，看是否有其他補強措施，例如一定是從廠商Server端呼叫並鎖定IP
    ```
 
-   檢查重複交易改成呼叫 CheckRejectTransaction()
+6. 檢查重複交易改成呼叫 CheckRejectTransaction()
 
    ```C#
    // 檢查要拒絕的交易(e.g.PLATFORM_TRANS_NO是否有重複,有pending交易..etc)
@@ -73,7 +73,7 @@
    }
    ```
 
-6. 交易回報確認呼叫 csRelation.ExecuteTradeConfirm()
+7. 交易回報確認呼叫 csRelation.ExecuteTradeConfirm()
 
    ```C#
    // -----
@@ -85,7 +85,7 @@
    }
    ```
 
-7. 金流回傳交易狀態碼的成功與失敗定義在設定檔案內，需請系統管理員設定
+8. 金流回傳交易狀態碼的成功與失敗定義在設定檔案內，需請系統管理員設定
 
    ```json
    {
@@ -94,7 +94,7 @@
    }
    ```
 
-8. 回傳交易狀態碼成功與否判斷需套用GT_TransReturnItem
+9. 回傳交易狀態碼成功與否判斷需套用GT_TransReturnItem
 
    ```C#
    GT_TransReturnItem	csTransReturnItem	= new GT_TransReturnItem();
@@ -112,35 +112,34 @@
    }
    ```
 
-9. 更新為請款成功，一律需使用csTransReturnItem.ePayTypeSettleResult判斷
+10. 更新為請款成功，一律需使用csTransReturnItem.ePayTypeSettleResult判斷
 
-   ```C#
-   // 請款結果為成功才能將狀態改為請款已完成
-   if (csTransReturnItem.ePayTypeSettleResult == PAY_TYPE_SETTLE_RESULT.SUCCEEDED)
-   {
-   	strResultCode						= "000000" ;
-   	csDCC["PROCESS_WORK"].objData		= (int) PROCESS_WORK.SETTLE ;
-   	csDCC["PROCESS_STATUS"].objData		= (int) PROCESS_STATUS.SUCCEEDED ;
-   }
-   ```
+    ```c#
+    // 請款結果為成功才能將狀態改為請款已完成
+    if (csTransReturnItem.ePayTypeSettleResult == PAY_TYPE_SETTLE_RESULT.SUCCEEDED)
+    {
+    	strResultCode						= "000000" ;
+       	csDCC["PROCESS_WORK"].objData		= (int) PROCESS_WORK.SETTLE ;
+       	csDCC["PROCESS_STATUS"].objData		= (int) PROCESS_STATUS.SUCCEEDED ;
+    }
+    ```
 
-10. 重複收到請款成功資料，不會有重複給點問題
+11. 重複收到請款成功資料，不會有重複給點問題
 
-   ```c#
-   bool bGetSettleType = false ; // [旗標] 此交易可能會被重覆確認，應該使用此變數做判斷是否已判斷請款狀態
-   
-   // 撈取訂單狀態判斷是否已確認過
-   if
-   (
-   	(r_nProcessWork == (int) PROCESS_WORK.SETTLE && r_nProcessStatus == (int) PROCESS_STATUS.SUCCEEDED) ||
-   	(r_nProcessWork == (int) PROCESS_WORK.SUCCESSFUL_TRADE_CONFIRM)
-   )
-   {
-       bGetSettleType							= true ;
-   }
-   
-   // 若bGetSettleType=true，就不會再次更新訂單，直接回傳已知結果
-   ```
+    ```c#
+    bool bGetSettleType = false ; // [旗標] 此交易可能會被重覆確認，應該使用此變數做判斷是否已判斷請款狀態
+       
+    // 撈取訂單狀態判斷是否已確認過
+    if
+    (
+       	(r_nProcessWork == (int) PROCESS_WORK.SETTLE && r_nProcessStatus == (int) PROCESS_STATUS.SUCCEEDED) ||
+       	(r_nProcessWork == (int) PROCESS_WORK.SUCCESSFUL_TRADE_CONFIRM)
+    )
+    {
+        bGetSettleType = true ;
+    }
+       
+    // 若bGetSettleType=true，就不會再次更新訂單，直接回傳已知結果
+    ```
 
-   
-
+    
