@@ -14,6 +14,7 @@
 | **1.60.0** | 2022/01/20 | 吳志豪 | 1.修改『8.取得問題回報API』的 IsCheckDeleteAccount 參數命名 |
 | **1.61.0** | 2022/02/10 | 林子傑 | 1.修改33.簡訊發送 API |
 | **1.62.0** | 2022/03/15 | 吳志豪 | 1.修改『8.取得問題回報API』新增回傳資訊相關說明並加上產生check_code注意事項 |
+| **1.63.0** | 2022/04/11 | 吳志豪 | 1.修改『7.新增問題回報API』新增傳入參數 IsForbidFromGame(遊戲是否自行進行停權作業) |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -524,26 +525,27 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 
 需要參數：
 
-| 參數            | 是否必填 | 值範例                                   | 說明                                                         |
-| --------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
-| game            | V        | STAR31                                   | GameTower_Member.FAQ_Class 的 CLASS_ID<br />也就是既有串接問題回報的CID參數 |
-| class_no        | V        | 138                                      | 可使用『取得問題回報分類』API取得<br />若為申請刪除帳號的請傳入0 |
-| member_no       | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
-| username        | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
-| email           | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
-| phone           |          | 0987654321                               | 電話                                                         |
-| message         | V        | 測試訊息                                 | 回報內容<br />若為申請刪除帳號的請將帶入該玩家儲值狀況以便客服參考 |
-| uni_business    | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
-| os              |          |                                          | 作業系統                                                     |
-| info            |          |                                          | 遊戲端對應LOG資訊                                            |
-| viplevel        |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
-| lang            |          | TW                                       | 多國語系規格，目前提供 TW、CN、EN、TH、JP、VN、ID，預設：TW  |
-| platform        | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
-| IntumitDialogId |          | 84f0eca6-8206-4a83-8427-94d187b61001     | 智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
-| IsDeleteAccount |          | TRUE                                     | TRUE OR FALSE<br />是否為申請刪除帳號<br />若為遊戲內刪除功能要使用的話請傳入TRUE<br />※此參數預計2022/01/26 12:00上線 |
-| nickname        |          |                                          | 遊戲暱稱                                                     |
-| check_code      | V        | FEB5FF5F64938A51D5B10102840B17BA0CE8BBA8 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
-| 圖片、影片      |          |                                          | 須透過FormData file upload，檔案大小不能超過10mb<br>圖片格式：PNG、JPG<br/>影片格式：MOV、MP4 |
+| 參數             | 是否必填 | 值範例                                   | 說明                                                         |
+| ---------------- | -------- | ---------------------------------------- | ------------------------------------------------------------ |
+| game             | V        | STAR31                                   | GameTower_Member.FAQ_Class 的 CLASS_ID<br />也就是既有串接問題回報的CID參數 |
+| class_no         | V        | 138                                      | 可使用『取得問題回報分類』API取得<br />若為申請刪除帳號的請傳入0 |
+| member_no        | V        | 764466                                   | 會員編號(若不是串GT帳號的話請帶 0)                           |
+| username         | V        | hsiehld                                  | 會員名稱或識別值(若不是串GT帳號該參數資訊為主要搜尋的KEY)    |
+| email            | V        | sfhsieh@igs.com.tw                       | 電子信箱                                                     |
+| phone            |          | 0987654321                               | 電話                                                         |
+| message          | V        | 測試訊息                                 | 回報內容<br />若為申請刪除帳號的請將帶入該玩家儲值狀況以便客服參考 |
+| uni_business     | V        | 22                                       | 介接來源，沒有傳入時預設帶入 99<br>0 = gametower 未登入<br>1 = gametower<br>97 = 隨你玩 (VIP專屬購點申請) <br>98 = 隨你玩 (尊榮服務鈴) <br>99 = gametower 遊戲端<br>22 = 行動平台<br><br>其他定義可由GameTower_Member.dbo.MEMBER_CODE_ComeFrom資料表查詢 |
+| os               |          |                                          | 作業系統                                                     |
+| info             |          |                                          | 遊戲端對應LOG資訊                                            |
+| viplevel         |          | 0                                        | VIP數字等級，若沒有帶該參數預設為0(越高客服的服務越好)，預設：0 |
+| lang             |          | TW                                       | 多國語系規格，目前提供 TW、CN、EN、TH、JP、VN、ID，預設：TW  |
+| platform         | V        | 5                                        | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台 |
+| nickname         |          |                                          | 遊戲暱稱                                                     |
+| IntumitDialogId  |          | 84f0eca6-8206-4a83-8427-94d187b61001     | 智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
+| IsDeleteAccount  |          | TRUE                                     | TRUE OR FALSE<br />是否為申請刪除帳號(預設為FALSE)<br />若為遊戲內刪除功能要使用的話請傳入TRUE |
+| IsForbidFromGame |          | TRUE                                     | TRUE OR FALSE<br />遊戲是否自行進行停權作業(預設為FALSE)<br />若 IsDeleteAccount = TRUE 且為遊戲內會自行進行停權的話(即不走客服於後端『問題回報-訊息維護』工具進行驗證後再停權的流程)請傳入TRUE<br />若為TRUE的話，該問題回報的案件狀態會自動變更成已結案<br />※此參數預計2022/04/27 12:00上線 |
+| check_code       | V        | FEB5FF5F64938A51D5B10102840B17BA0CE8BBA8 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
+| 圖片、影片       |          |                                          | 須透過FormData file upload，檔案大小不能超過10mb<br>圖片格式：PNG、JPG<br/>影片格式：MOV、MP4 |
 
 check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
 
