@@ -142,4 +142,14 @@
     // 若bGetSettleType=true，就不會再次更新訂單，直接回傳已知結果
     ```
 
-    
+12. 代理合作模式的金流串接 (例如 TH_MRW_BankCenter)，金流商和代理商後台時區有可能有差異，需確認正式環境金流商回傳的請款時間，有無需要做時區轉換
+
+    ```c#
+    // 正式環境回傳的請款日期是 GMT +8，專案希望轉 GMT +7
+    if (a_csWS.eEnvironment == GT_ENVIRONMENT.FORMAL)
+    {
+    		dtSettle							= dtSettle.AddHours(-1) ;
+    }
+    ```
+
+
