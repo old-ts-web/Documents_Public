@@ -9,6 +9,7 @@
 | **1.63.0** | 2022/04/11 | 吳志豪 | 1.修改『7.新增問題回報API』新增傳入參數 IsForbidFromGame(遊戲是否自行進行停權作業) |
 | **1.64.0** | 2022/08/10 | 謝昇富 | 修改『9.遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc)』傳入參數 f_strAccount 新增支援別名 |
 | **1.65.0** | 2022/08/19 | 林子傑 | 修改『60.儲值黑名單上限API』修正回傳範例 |
+| **1.66.0** | 2022/08/22 | 林子傑 | 新增『66.修改密碼API』 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -5701,5 +5702,83 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 {"Code":"1001","Message":"缺少必要參數","Data":null}
 ```
 
+## 66.修改密碼API
+
+各環境Domain：
+
+​	開發環境：api.gt.web
+
+​	測試環境：api-twtest.towergame.com
+
+​	正式環境：api.gametower.com.tw
+
+驗證網址：
+
+​	https://{對應環境Domain}/common/receive/Member/ChangePassword.aspx?lc={用戶 LC}&GameNo={遊戲編號}&CHECK_CODE={檢查碼}
+
+※CheckCode計算方式是將傳送的參數資料依照 Key 排序，<BR>將所有 Value 相加(排除 CheckCode 參數)，<BR>最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA512加密並轉成大寫而成。
+
+CHECK_CODE檢查碼計算**僅納入 lc 和 GameNo**
 
 
+
+傳遞參數方式：
+
+| Request Header |      |
+| -------------- | ---- |
+| HTTP Method    | POST |
+
+需要參數：
+
+| 參數名稱             | 型別   | 長度 | 是否必填                | 說明                                       |
+| -------------------- | ------ | ---- | ----------------------- | ------------------------------------------ |
+| f_strOldPassword     | string | 14   | 是                      | 舊密碼                                     |
+| f_strNewPassword     | string | 14   | 是                      | 新密碼                                     |
+| f_strConfirmPassword | string | 14   | 是                      | 密碼再確認                                 |
+| f_strIP              | string |      | 否                      | 用戶 IP (如果是從 server 呼叫，才需要傳入) |
+| f_strGuid            | String |      | 否                      | 驗證碼識別 ID，透過 31.取得驗證碼 API 取得 |
+| f_strVerifyCode      | String |      | 有傳入 f_strGuid 時必填 | 驗證碼                                     |
+
+
+check_code範例程式如下(請注意實際呼叫API的內容為Json格式)
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+    
+     // 依照 Key 排序，將所有 Value 相加 (排除 CheckCode 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+     	if (!strKey.Equals("CheckCode",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+    
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+    
+	 return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA512") ;
+}
+
+```
+
+回傳結果：
+
+| 參數           | 說明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| RETURN_CODE    | 等於 0 時為成功，其他為失敗                                  |
+| RETURN_MESSAGE | 回傳結果訊息(若RETURN_CODE = 0 則回傳 "成功"，反之則回傳提供適合前端使用者觀看的錯誤訊息) |
+
+成功範例：
+
+```json
+{"RETURN_CODE":"0","RETURN_MESSAGE":"成功"}
+```
+
+失敗範例：
+
+```json
+{"RETURN_CODE":-21,"RETURN_MESSAGE":"「新密碼」欄位與「密碼再確認」欄位輸入內容不同，請重新輸入。"}
+```
+
+## 
