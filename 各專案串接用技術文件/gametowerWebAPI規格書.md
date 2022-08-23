@@ -5714,11 +5714,13 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 驗證網址：
 
-​	https://{對應環境Domain}/common/receive/Member/ChangePassword.aspx?lc={用戶 LC}&GameNo={遊戲編號}&CHECK_CODE={檢查碼}
+​	https://{對應環境Domain}/common/receive/Member/ChangePassword.aspx?Account={帳號 or 別名}&GameNo={遊戲編號}&Time={時間，格式 yyyy/MM/dd HH:mm:ss，和當前時間 (GMT+8) 不可差超過 10分鐘}&CHECK_CODE={檢查碼}
 
 ※CheckCode計算方式是將傳送的參數資料依照 Key 排序，<BR>將所有 Value 相加(排除 CheckCode 參數)，<BR>最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA512加密並轉成大寫而成。
 
-CHECK_CODE檢查碼計算**僅納入 lc 和 GameNo**
+CHECK_CODE檢查碼計算**僅納入 Account、Time 和 GameNo**
+
+Time參數是為了讓同帳號 CHECK_CODE 有變化，避免產生安全漏洞
 
 
 
