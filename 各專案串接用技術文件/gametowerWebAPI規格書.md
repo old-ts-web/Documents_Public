@@ -367,6 +367,8 @@ height="0.84375in"}
 
 若是回傳-99 代表伺服器忙碌中
 
+
+
 **備援登入(GET)**
 
 需要參數：
@@ -391,20 +393,74 @@ height="0.84375in"}
 | -99     | 其他錯誤                                               |
 | lc 字串 | 純文字格式的 lc 字串 <br>e.g. 24123C0C0C413D423D...etc |
 
+![image-20220907165423820](images/image-20220907165423820.png)
 
+App 內的C++範本程式
+
+```c++
+-(void) DowebSupporLoginFB:(std::string) errorCode andErrorMsg:(std::string) errorMsg
+{
+  if (GtMobile::Userpreferences::Instance()->FindIsBoolEnabled("IsAppleTest"))
+  {
+    return;
+  }
+  NSLog(@"DowebSupporLoginFB errorCode = %s, errorMsg = %s", errorCode.c_str(), errorMsg.c_str());
+
+  std::string appId = g_fbLogin -> m_fbAppId;
+  std::string deviceId = GtMobile::LuaUserDefault::GetInstance()->GetData(GtMobile::KEY_WEB_DEVICE_ID_V2, "");
+  std::string appUUID = GtMobile::LuaUserDefault::GetInstance()->GetData(GtMobile::KEY_WEB_APP_UUID_V2, "");
+  std::string deviceUUID = GtMobile::LuaUserDefault::GetInstance()->GetData(GtMobile::KEY_WEB_DEVICE_UUID_V2, "");
+  std::string deviceNo = GtMobile::LuaUserDefault::GetInstance()->GetData(GtMobile::KEY_WEB_DEVICE_NO_V2, "");
+  std::string account = cocos2d::UserDefault::getInstance()->getStringForKey(GtMobile::KEY_LAST_FB_ACCOUNT.c_str(), "");
+
+  std::string appIdEncode = [self UsingEncode: appId];
+  std::string deviceIdEncode = [self UsingEncode: deviceld];
+  std::string appUUIDEncode = [self UsingEncode: appUUID];
+  std::string deviceUUIDEncode = [self UsingEncode: deviceUUID];
+  std::string deviceNoEncode = [self UsingEncode: deviceNo];
+  std::string accountEncode = [self UsingEncode: account];
+  std::string errorCodeEncode = [self UsingEncode: errorCode];
+  std::string errorMsgEncode = [self UsingEncode: errorMsg];
+
+  std::string fullUR = "";
+  std::string fbAuthUrl = GET_CONFIG_VALUE(KEY_FB_AUTH_V3);
+  if (GtMobile::Userpreferences::Instance()->FindIsBoolEnabled("IsAppleTest"))
+  {
+    fbAuthUrl = GET_CONFIG_VALUE_APPLE(KEY_FB_AUTH_V3);
+  }
+
+  fullURL = Ishtar::Sprintf(fbAuthUrl, appIdEncode, "", "",
+                            deviceIdEncode, appUUIDEncode, deviceUUIDEncode, deviceNoEncode,
+                            accountEncode, errorCodeEncode, errorMsgEncode);
+
+  NSURL *url = [NSURL URLWithString: [NSString stringWithUTF8String: fullURL.c_str()]];
+  NSLog(@"DoWebSupporLoginFB %@", [NSString stringwithUlF8String: fullURL.c_str()]);
+
+  ASIHTTPRequest* request = [ASIHTTPRequest requestwithURL: url];
+  [request setDelegate: self];
+  [request setNumberOfTimesToRetryOnTimeout: 2];
+  [request setTimeOutSeconds: 20];
+  [request setValidatesSecureCertificate: NO];
+  [request setUseCookiepersistence: YES];
+
+  [request setDidFinishSelector: (DidFinishFBAuthenticate: )];
+  [request setDidFailSelector: (DidFailFBAuthenticate: )];
+  [g_fbRequestQueue addOperation: request];
+}
+```
 
 回傳格式：
 
 成功範例
 
 ```json
-{24011B54544E531B534D4B504B4D1B4C4C4B1B1B675B534F4B544B1B541B4E6915}
+24011B54544E531B534D4B504B4D1B4C4C4B1B1B675B534F4B544B1B541B4E6915
 ```
 
 失敗範例
 
 ```json
-{-99}
+-99
 ```
 
 
