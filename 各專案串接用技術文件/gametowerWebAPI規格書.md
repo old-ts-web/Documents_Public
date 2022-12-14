@@ -10,6 +10,7 @@
 | **1.64.0** | 2022/08/10 | 謝昇富 | 修改『9.遊戲中簡訊驗證API(ex.好友贈禮、天團匯款...etc)』傳入參數 f_strAccount 新增支援別名 |
 | **1.65.0** | 2022/08/19 | 林子傑 | 修改『60.儲值黑名單上限API』修正回傳範例 |
 | **1.66.0** | 2022/08/22 | 林子傑 | 新增『66.修改密碼API』 |
+| **1.67.0** | 2022/12/14 | 吳志豪 | 修改『7.新增問題回報API』新增傳入參數 IsAutoForbid(是否自動停權) |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -594,7 +595,8 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | nickname         |          |                                          | 遊戲暱稱                                                     |
 | IntumitDialogId  |          | 84f0eca6-8206-4a83-8427-94d187b61001     | 智能客服對話紀錄識別ID<BR>通常是從智能客服引導玩家至問題回報連結時會在網址列多帶參數DialogId的內容值，<BR>所以若是問題回報頁是專案自己刻的且有串接智能客服的話，需要自行取得DialogId並透過透過參數(IntumitDialogId)一起呼叫『新增問題回報 API』 |
 | IsDeleteAccount  |          | TRUE                                     | TRUE OR FALSE<br />是否為申請刪除帳號(預設為FALSE)<br />若為遊戲內刪除功能要使用的話請傳入TRUE |
-| IsForbidFromGame |          | TRUE                                     | TRUE OR FALSE<br />遊戲是否自行進行停權作業(預設為FALSE)<br />若 IsDeleteAccount = TRUE 且為遊戲內會自行進行停權的話(即不走客服於後端『問題回報-訊息維護』工具進行驗證後再停權的流程)請傳入TRUE<br />若為TRUE的話，該問題回報的案件狀態會自動變更成已結案<br />※此參數預計2022/04/27 12:00上線 |
+| IsForbidFromGame |          | TRUE                                     | TRUE OR FALSE<br />遊戲是否自行進行停權作業(預設為FALSE)<br />若 IsDeleteAccount = TRUE 且為遊戲內會自行進行停權的話(即不走客服於後端『問題回報-訊息維護』工具進行驗證後再停權的流程)請傳入TRUE<br />若為TRUE的話，該問題回報的案件狀態會自動變更成已結案 |
+| IsAutoForbid     |          | TRUE                                     | TRUE OR FALSE<br />建立的申請單是否自動直接呼叫停權處理(不透過客服確認)<br />若該參數『有』帶值(TRUE OR FALSE)的話，會以帶的值為主，進行處理<br /><br />若『沒有』使用該參數的話，則預設測試環境走自動停權，其餘環境是走透過客服的流程 |
 | check_code       | V        | FEB5FF5F64938A51D5B10102840B17BA0CE8BBA8 | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。 |
 | 圖片、影片       |          |                                          | 須透過FormData file upload，檔案大小不能超過10mb<br>圖片格式：PNG、JPG<br/>影片格式：MOV、MP4 |
 
