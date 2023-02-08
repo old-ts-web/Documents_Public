@@ -11,6 +11,7 @@
 | **1.65.0** | 2022/08/19 | 林子傑 | 修改『60.儲值黑名單上限API』修正回傳範例 |
 | **1.66.0** | 2022/08/22 | 林子傑 | 新增『66.修改密碼API』 |
 | **1.67.0** | 2022/12/14 | 吳志豪 | 修改『7.新增問題回報API』新增傳入參數 IsAutoForbid(是否自動停權) |
+| **1.68.0** | 2023/02/07 | 吳志豪 | 修改『34.問題回報滿意度查詢API』新增傳入參數 f_nPlatform(廠商編號)與f_strCheckCode(檢核碼)<br />修改『35.問題回報滿意度新增API』新增傳入參數 f_nPlatform(廠商編號)與f_strCheckCode(檢核碼) |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -2891,13 +2892,34 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 
 需要參數：
 
-| 參數名稱      | 規格   | 是否必填 | 描述                                            |
-| ------------- | ------ | -------- | ----------------------------------------------- |
-| f_nMode       | string | 是       | 單元代碼，查詢皆為1                             |
-| f_nIndexNo    | string | 是       | 查詢編號為該表INDEX_NO 支援多筆 ex. 123,456,789 |
-| f_strLanguage | string | 否       | 語系 預設為TW (TW-繁體 EN-英文 CN-簡體)         |
+| 參數名稱       | 規格   | 是否必填 | 描述                                                         |
+| -------------- | ------ | -------- | ------------------------------------------------------------ |
+| f_nMode        | string | 是       | 單元代碼，查詢皆為1                                          |
+| f_nIndexNo     | string | 是       | 查詢編號為該表INDEX_NO 支援多筆 ex. 123,456,789              |
+| f_strLanguage  | string | 否       | 語系 預設為TW (TW-繁體 EN-英文 CN-簡體)                      |
+| f_nPlatform    | int    | 是       | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />與『7.新增問題回報 API』中傳入的platform即可<br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台<br />※預計2023/02/24號更新至正式環境 |
+| f_strCheckCode | string | 是       | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。<br />※預計2023/02/24號更新至正式環境 |
 
-  
+  check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+
+     // 依照 Key 排序，將所有 Value 相加 (排除 CHECK_CODE 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+         if (!strKey.Equals("CHECK_CODE",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+
+     return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA1") ;
+}
+
+```
 
 回傳參數說明：
 
@@ -2959,14 +2981,35 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 
 需要參數：
 
-| 參數名稱          | 規格   | 是否必填 | 描述                                                |
-| ----------------- | ------ | -------- | --------------------------------------------------- |
-| f_nMode           | string | 是       | 單元代碼，查詢皆為0                                 |
-| f_nIndexNo        | string | 是       | 編號為該表INDEX_NO 要回寫的編號                     |
-| f_strScoreOptions | string | 昰       | 基本評價(0：非常滿意 1：尚可 2：不滿意)，請傳入數字 |
-| f_strSuggestion   | string | 否       | 回饋意見                                            |
+| 參數名稱          | 規格   | 是否必填 | 描述                                                         |
+| ----------------- | ------ | -------- | ------------------------------------------------------------ |
+| f_nMode           | string | 是       | 單元代碼，請傳入0                                            |
+| f_nIndexNo        | string | 是       | 編號為該表INDEX_NO 要回寫的編號                              |
+| f_strScoreOptions | string | 昰       | 基本評價(0：非常滿意 1：尚可 2：不滿意)，請傳入數字          |
+| f_strSuggestion   | string | 否       | 回饋意見                                                     |
+| f_nPlatform       | int    | 是       | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />與『7.新增問題回報 API』中傳入的platform即可<br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台<br />※預計2023/02/24號更新至正式環境 |
+| f_strCheckCode    | string | 是       | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。<br />※預計2023/02/24號更新至正式環境 |
 
-  
+   check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+
+     // 依照 Key 排序，將所有 Value 相加 (排除 CHECK_CODE 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+         if (!strKey.Equals("CHECK_CODE",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+
+     return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA1") ;
+}
+
+```
 
 回傳參數說明：
 
