@@ -12,6 +12,7 @@
 | **1.66.0** | 2022/08/22 | 林子傑 | 新增『66.修改密碼API』 |
 | **1.67.0** | 2022/12/14 | 吳志豪 | 修改『7.新增問題回報API』新增傳入參數 IsAutoForbid(是否自動停權) |
 | **1.68.0** | 2023/02/07 | 吳志豪 | 修改『34.問題回報滿意度查詢API』新增傳入參數 f_nPlatform(廠商編號)與f_strCheckCode(檢核碼)<br />修改『35.問題回報滿意度新增API』新增傳入參數 f_nPlatform(廠商編號)與f_strCheckCode(檢核碼) |
+| **1.68.1** | 2023/02/09 | 吳志豪 | 修改『34.問題回報滿意度查詢API』修改f_strCheckCode(檢核碼)的描述與更新錯誤代碼<br />修改『35.問題回報滿意度新增API』修改f_strCheckCode(檢核碼)的描述與更新錯誤代碼 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -2898,7 +2899,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | f_nIndexNo     | string | 是       | 查詢編號為該表INDEX_NO 支援多筆 ex. 123,456,789              |
 | f_strLanguage  | string | 否       | 語系 預設為TW (TW-繁體 EN-英文 CN-簡體)                      |
 | f_nPlatform    | int    | 是       | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />與『7.新增問題回報 API』中傳入的platform即可<br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台<br />※預計2023/02/24號更新至正式環境 |
-| f_strCheckCode | string | 是       | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。<br />※預計2023/02/24號更新至正式環境 |
+| f_strCheckCode | string | 是       | CHECK_CODE計算方式是將傳送的參數(f_nIndexNo與f_nPlatform)依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) (同建立問題回報所使用的PRIVATE_KEY)，再用 SHA1加密並轉成大寫而成。<br />※預計2023/02/24號更新至正式環境 |
 
   check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
 
@@ -2923,12 +2924,19 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 回傳參數說明：
 
-| 值   | 說明              |
-| ---- | ----------------- |
-| 0    | 成功              |
-| -1   | 伺服器連線失敗    |
-| -2   | f_nIndexNo 未帶值 |
-| -3   | 例外錯誤          |
+| 值   | 說明                                  |
+| ---- | ------------------------------------- |
+| 0    | 成功                                  |
+| -1   | 伺服器連線失敗                        |
+| -2   | 找不到問題回報記錄                    |
+| -3   | 已回應過問卷                          |
+| -4   | 基本評價未帶入                        |
+| -5   | 基本評價定義不存在                    |
+| -6   | 意見超過 200 字元                     |
+| -7   | 建立更新指令錯誤                      |
+| -8   | 其他錯誤                              |
+| -9   | 例外錯誤                              |
+| -17  | 來源表單內容不符(CHECK_CODE 檢查不符) |
 
 
 
@@ -2988,7 +2996,7 @@ P.S：滿意度是客服有回覆後提供給玩家做的，該案件做過一�
 | f_strScoreOptions | string | 昰       | 基本評價(0：非常滿意 1：尚可 2：不滿意)，請傳入數字          |
 | f_strSuggestion   | string | 否       | 回饋意見                                                     |
 | f_nPlatform       | int    | 是       | 廠商編號，請參考儲值中心所建立的廠商編號 BANK_CENTER_Main.dbo.CONFIG_CODE_Platform.INDEX_NO <br />與『7.新增問題回報 API』中傳入的platform即可<br />e.g.<br />1 ：GT<br />5 ： APPPORTAL_PAYCENTER 行動平台<br />※預計2023/02/24號更新至正式環境 |
-| f_strCheckCode    | string | 是       | CHECK_CODE計算方式是將傳送的參數資料依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) ，再用 SHA1加密並轉成大寫而成。<br />※預計2023/02/24號更新至正式環境 |
+| f_strCheckCode    | string | 是       | CHECK_CODE計算方式是將傳送的參數(f_nIndexNo與f_nPlatform)依照 Key 排序，將所有 Value 相加(排除 CHECK_CODE 參數)，最後加上雙方約定的金鑰(PRIVATE_KEY) (同建立問題回報所使用的PRIVATE_KEY)，再用 SHA1加密並轉成大寫而成。<br />※預計2023/02/24號更新至正式環境 |
 
    check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
 
@@ -3013,17 +3021,19 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 
 回傳參數說明：
 
-| 值   | 說明               |
-| ---- | ------------------ |
-| 0    | 成功               |
-| -1   | 伺服器連線失敗     |
-| -2   | 找不到問題回報記錄 |
-| -3   | 已回應過問卷       |
-| -4   | 基本評價未帶入     |
-| -5   | 基本評價定義不存在 |
-| -7   | UPDATE指令失敗     |
-| -8   | 例外錯誤           |
-| -9   | 例外錯誤           |
+| 值   | 說明                                  |
+| ---- | ------------------------------------- |
+| 0    | 成功                                  |
+| -1   | 伺服器連線失敗                        |
+| -2   | 找不到問題回報記錄                    |
+| -3   | 已回應過問卷                          |
+| -4   | 基本評價未帶入                        |
+| -5   | 基本評價定義不存在                    |
+| -6   | 意見超過 200 字元                     |
+| -7   | 建立更新指令錯誤                      |
+| -8   | 其他錯誤                              |
+| -9   | 例外錯誤                              |
+| -17  | 來源表單內容不符(CHECK_CODE 檢查不符) |
 
 
 
