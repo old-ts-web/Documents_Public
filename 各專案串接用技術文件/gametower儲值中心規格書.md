@@ -11,6 +11,7 @@
 | **1.71.0** | 2022/10/17 | 魏嘉男 | 新增(八)廠商Server端交易標準流程 |
 | **1.72.0** | 2022/10/27 | 魏嘉男 | 刪除OffGamersCard國際充值通路與說明 |
 | **1.73.0** | 2023/04/25 | 林子傑 | 部分內容轉移資訊站 |
+| **1.74.0** | 2023/05/11 | 魏嘉男 | 修改(五)批准/取消交易流程<br/>新增(十四)查詢交易紀錄請求 |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -50,11 +51,11 @@
 
 ![image-20210303164218353](images/image-20210303164218353.png)
 
-### (五)取消交易流程
+### (五)批准/取消交易流程
 
-說明：使用者欲取消交易。
+說明：廠商欲批准/取消交易。
 
-適用付費平台：有提供取消交易的付費方式(**詳見【四、付款方式代碼表】**)。
+適用廠商：有提供准/取消交易交易的廠商。(需跟gametower確認是否支援)
 
 ![image-20210303164244421](images/image-20210303164244421.png)
 
@@ -242,11 +243,11 @@
 
 **(因應新版個資法，降低個資外洩風險，已停用此電文格式，請改用電文格式八)**
 
-### (六)提出取消交易請求
+### (六)提出批准/取消交易請求
 
 | (六) 提出取消交易請求電文參數說明                            |
 | ------------------------------------------------------------ |
-| 廠商Server傳送Url Post到儲值中心接收頁面，儲值中心將結果Response.Write回覆 |
+| 廠商Server傳送Url Post到儲值中心接收頁面，儲值中心將結果Response.Write回覆<br />批准交易(改為成功)位置是 /common/receive/ApproveTrade.aspx<br/>取消交易(改為失敗)位置是 /common/receive/CancelTrade.aspx |
 
 | 參數名稱          | 參數大小       | 必要 | 説明                                |
 | ----------------- | -------------- | ---- | ----------------------------------- |
@@ -358,6 +359,65 @@
 | 電文參數說明                                                 |
 | ------------------------------------------------------------ |
 | 見<br />http://support.towergame.com/?p=11682<br />4.設定發起交易時發票預設值 |
+
+### (十四)查詢交易紀錄請求
+
+適用廠商：有提供准/取消交易交易的廠商。(需跟gametower確認是否支援)
+
+| (十四) 查詢交易紀錄參數說明                                  |
+| ------------------------------------------------------------ |
+| 廠商Server傳送Url Post到儲值中心接收頁面，儲值中心將結果Response.Write回覆資料<br/>/common/receive/QueryTransRecord.aspx |
+
+| 參數名稱       | 參數大小     | 必要 | 說明                                |
+| -------------- | ------------ | ---- | ----------------------------------- |
+| PLATFORM       | varchar(15)  | 是   | 廠商ID                              |
+| START_DATETIME | Varchar(19)  | 是   | 查詢開始時間(yyyy/mm/dd hh:MM:ss)   |
+| END_DATETIME   | Varchar(19)  | 是   | 查詢結束時間(yyyy/mm/dd hh:MM:ss)   |
+| PAY_TYPE       | integer      | 否   | 付費方式 詳見【四、付款方式代碼表】 |
+| IDENTITY_1     | varchar(100) | 否   | 使用者識別值_1                      |
+| PAGE           | integer      | 否   | 頁數，default為1                    |
+| PAGE_SIZE      | integer      | 否   | 每頁筆數，default為 20              |
+| CHECK_CODE     | char(40)     | 是   | 驗證碼                              |
+
+**儲值中心回覆參數**
+
+| 參數名稱       | 參數大小      | 必要 | 說明               |
+| -------------- | ------------- | ---- | ------------------ |
+| PLATFORM       | varchar(15)   | 否   | 廠商ID             |
+| RESULT_CODE    | varchar(6)    | 是   | 回覆結果代號       |
+| RESULT_MESSAGE | nvarchar(200) | 是   | 回覆結果訊息       |
+| DATA           | string        | 否   | 回傳資料(JSON格式) |
+
+**DATA回傳資料(JSON格式)參數**
+
+| 參數名稱       | 參數大小       | 必要 | 說明               |
+| -------------- | -------------- | ---- | ------------------ |
+| PAGE       | integer    | 是   | 頁數             |
+| PAGE_SIZE | integer | 是   | 每頁筆數   |
+| TOTAL | integer | 是   | 總筆數       |
+| ITEMS    | string | 是   | 資料列表(JSON Array格式)           |
+
+**ITEMS資料列表(JSON Array單筆格式)參數**
+
+| 參數名稱       | 參數大小       | 必要 | 說明               |
+| -------------- | -------------- | ---- | ------------------ |
+| PAY_TYPE             | integer        | 是   | 付費方式 詳見【四、付款方式代碼表】                       |
+| CENTER_TRANS_NO      | char(19)       | 是   | 儲值中心訂單編號                                          |
+| PLATFORM_TRANS_NO    | varchar(50)    | 是   | 廠商訂單編號                                              |
+| TRADE_TRANS_NO       | varchar(50)    | 否   | 付費方式訂單編號                                          |
+| IDENTITY_1           | varchar(100)   | 否   | 使用者識別值_1                                            |
+| IDENTITY_2           | varchar(100)   | 否   | 使用者識別值_2                                            |
+| TYPE                 | integer        | 是   | 狀態：<br/>1-失敗 2-進行中 3-已成功 4-取消授權 5-取消請款 |
+| TRANS_RETURN_CODE    | varchar(30)    | 否   | 交易回傳的錯誤代碼                                        |
+| TRANS_RETURN_MESSAGE | nvarchar(500)  | 否   | 交易回傳的錯誤訊息                                        |
+| CURRENCY_ID          | varchar(3)     | 是   | 貨幣別                                                    |
+| AMOUNT               | decimal(19, 5) | 是   | 交易金額                                                  |
+| PRICE                | decimal(19, 5) | 是   | 交易價值                                                  |
+| FEE                  | decimal(19, 5) | 是   | 交易費用                                                  |
+| SETTLE_DATETIME      | Varchar(19)    | 否   | 請款完成時間(yyyy/mm/dd hh:MM:ss)                         |
+| C_DATETIME | Varchar(19) | 是 | 訂單建立時間(yyyy/mm/dd hh:MM:ss) |
+| E_DATETIME | Varchar(19) | 否 | 訂單修改時間(yyyy/mm/dd hh:MM:ss) |
+| REMARK | nvarchar(2000) | 否 | 備註 |
 
 ## 四.付款方式代碼表
 
