@@ -7,11 +7,11 @@
 | --- | --- |--- | ---|
 | **0.5**    | 2010/12/06 | 魏嘉男 | 新建立文件                     |
 | (略) |  |  |  |
-| **1.70.0** | 2022/08/24 | 林子傑 | (1)四.付款方式代碼表新增 智冠相關 WebATM<br/>(2)五.各付費方式延伸欄位說明新增 智冠相關 WebATM |
 | **1.71.0** | 2022/10/17 | 魏嘉男 | 新增(八)廠商Server端交易標準流程 |
 | **1.72.0** | 2022/10/27 | 魏嘉男 | 刪除OffGamersCard國際充值通路與說明 |
 | **1.73.0** | 2023/04/25 | 林子傑 | 部分內容轉移資訊站 |
 | **1.74.0** | 2023/05/11 | 魏嘉男 | 修改(五)批准/取消交易流程<br/>新增(十四)查詢交易紀錄請求 |
+| **1.75.0** | 2023/05/23 | 林子傑 | (1)四.付款方式代碼表新增 AFTEE |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -510,6 +510,9 @@ http://support.towergame.com/?page_id=16420
 | 231 | 泰國 KPlus (CodaShop) | (三)付費平台標準流程 | | | 見<br/>http://support.towergame.com/?p=20234 |
 | 232 | 泰國 TrueMoney CashCard (CodaShop) | (三)付費平台標準流程 | | | 見<br/>http://support.towergame.com/?p=20234 |
 | 233 | 馬來 Bank Transfers MAE (CodaShop) | (三)付費平台標準流程 | | | 見<br/>http://support.towergame.com/?p=20234 |
+| 234 | 全支付 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=25548 |
+| 235 | Gash信用卡 | (一)廠商標準流程 | | | 請參考127-信用卡說明 |
+| 239 | AFTEE | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=28435 |
 | 501 | MOL泰國版_12Call卡 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20704 |
 | 502 | MOL泰國版_TrueMoney卡 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20704 |
 | 504 | MOL泰國版_MOLPoints卡 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20704 |
