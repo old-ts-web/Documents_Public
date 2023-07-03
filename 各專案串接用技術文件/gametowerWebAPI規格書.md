@@ -9,6 +9,7 @@
 | **1.68.0** | 2023/02/07 | 吳志豪 | 修改『34.問題回報滿意度查詢API』新增傳入參數 f_nPlatform(廠商編號)與f_strCheckCode(檢核碼)<br />修改『35.問題回報滿意度新增API』新增傳入參數 f_nPlatform(廠商編號)與f_strCheckCode(檢核碼) |
 | **1.68.1** | 2023/02/09 | 吳志豪 | 修改『34.問題回報滿意度查詢API』修改f_strCheckCode(檢核碼)的描述與更新錯誤代碼<br />修改『35.問題回報滿意度新增API』修改f_strCheckCode(檢核碼)的描述與更新錯誤代碼 |
 | **1.69.0** | 2023/04/24 | 林子傑 | 部分內容改指向資訊站 |
+| **1.70.0** | 2023/05/25 | 吳志豪 | 將LC登入的處理改成使用帶入dlc參數的方式 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -2849,9 +2850,7 @@ http://support.towergame.com/?p=25918
 https://www.gt.web/Games/Mobile/{遊戲別}/{平台 e.g Android or
 iOS}/Bank/ChoiceChannel.aspx (需請網頁組配合建立套皮頁)
 
-(EX：<https://www.gt.web/Games/Mobile/tmd/Android/Bank/ChoiceChannel.aspx?q_nGameServerGroupNo=30120&q_nTransOptionNo=69&q_strAppID=com.igs.TMD&q_strGroupID=&q_strPrizeIDs=FREEPLAY_141205_001&q_strGoogleVersion=&q_strAppVersion=&location=TW&q_strCurrencyID=TWD&q_dAmount=300&q_nPoint=300>&q_nPrizeType=1)←需先登入會員，研發端串接請透過al.aspx登入會員後再轉到該網址
-
-傳遞參數方式：
+(EX：<https://www.gt.web/Games/Mobile/tmd/Android/Bank/ChoiceChannel.aspx?q_nGameServerGroupNo=30120&q_nTransOptionNo=69&q_strAppID=com.igs.TMD&q_strGroupID=&q_strPrizeIDs=FREEPLAY_141205_001&q_strGoogleVersion=&q_strAppVersion=&location=TW&q_strCurrencyID=TWD&q_dAmount=300&q_nPoint=300>&dlc={lc}&q_nPrizeType=1)←需先登入會員，所以請帶入LC參數
 
 | Request Header |      |
 | -------------- | ---- |
@@ -3146,21 +3145,21 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 (二)、收訊人員前置作業：
 
 1.  註冊gametower帳號：
-    開發：<https://www.gt.web/member/register.aspx>\
-    測試：<https://www-twtest.towergame.com/member/register.aspx>\
-    正式：<https://www.gametower.com.tw/member/register.aspx>\
-    ※ 「E-mail電子信箱」請填公司個人信箱e.g. *damonhou\@igs.com.tw*
+    開發：https://www.gt.web/member/register.aspx
+    測試：https://www-twtest.towergame.com/member/register.aspx
+    正式：https://www.gametower.com.tw/member/register.aspx
+    ※ 「E-mail電子信箱」請填公司個人信箱e.g. *damonhou@igs.com.tw*
 
 2.  gametower帳號升級為標準會員：
-    開發：<https://www.gt.web/member/login.aspx?re=https%3A%2F%2Fwww.gt.web%2Fmember%2Fregister.aspx>\
-    測試：<https://www-twtest.towergame.com/member/login.aspx?re=https%3A%2F%2Fwww-twtest.towergame.com%2Fmember%2Fregister.aspx>\
-    正式：<https://www.gametower.com.tw/member/login.aspx?re=https%3A%2F%2Fwww.gametower.com.tw%2Fmember%2Fregister.aspx>\
+    開發：https://www.gt.web/member/register.aspx?dlc={lc}
+    測試：https://www-twtest.towergame.com/member/register.aspx?dlc={lc}
+    正式：https://www.gametower.com.tw/member/register.aspx?dlc={lc}
     ※ 請填真實姓名e.g. *侯志成*
 
 3.  gametower帳號綁定LINE帳號：
-    開發：<https://admin.gt.web/common/admin/LINENotify/index.aspx>\
-    測試：<https://admin-twtest.towergame.com/common/admin/LINENotify/index.aspx>\
-    正式：<https://admin.gametower.com.tw/common/admin/LINENotify/index.aspx>\
+    開發：https://admin.gt.web/common/admin/LINENotify/index.aspx
+    測試：https://admin-twtest.towergame.com/common/admin/LINENotify/index.aspx
+    正式：https://admin.gametower.com.tw/common/admin/LINENotify/index.aspx
     (1) 登入gametower官方帳號：
     ![](images/media/image15.png){width="2.009027777777778in"
     height="2.1041666666666665in"}
