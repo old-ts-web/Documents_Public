@@ -7,12 +7,11 @@
 | --- | --- |--- | ---|
 | **0.5**    | 2010/12/06 | 魏嘉男 | 新建立文件                     |
 | (略) |  |  |  |
-| **1.71.0** | 2022/10/17 | 魏嘉男 | 新增(八)廠商Server端交易標準流程 |
-| **1.72.0** | 2022/10/27 | 魏嘉男 | 刪除OffGamersCard國際充值通路與說明 |
 | **1.73.0** | 2023/04/25 | 林子傑 | 部分內容轉移資訊站 |
 | **1.74.0** | 2023/05/11 | 魏嘉男 | 修改(五)批准/取消交易流程<br/>新增(十四)查詢交易紀錄請求 |
 | **1.75.0** | 2023/05/16 | 吳志豪 | 移除天天賺渠道相關資訊 |
 | **1.75.1** | 2023/05/23 | 林子傑 | (1)四.付款方式代碼表新增 AFTEE |
+| **1.76.0** | 2023/07/05 | 林子傑 | (1)四.付款方式代碼表新增 KPAY |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -544,6 +543,7 @@ http://support.towergame.com/?page_id=16420
 | 719 | LRPay | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=24775 |
 | 721 | ZINPay | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=25444 |
 | 723 | IrPhpPay | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=27336 |
+| 744 | KPay | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=29137 |
 | 801 | Momo_QR (VNPay) | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20761 |
 | 802 | Zalo_QR (VNPay) | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20761 |
 | 803 | Upacp_PC (VNPay) | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20761 |
