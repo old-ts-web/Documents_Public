@@ -16,7 +16,7 @@
 
 新註冊的帳號需點選左上角「後端首頁」→「權限申請」開通相關權限
 
-![](images/media2/image10.png)
+![](images/media2/image10-1.png)
 
 3\. 權限申請會導向「網頁案件管理系統」填寫gametower後端權限申請需求
 
