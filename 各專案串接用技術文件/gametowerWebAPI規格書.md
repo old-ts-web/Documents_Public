@@ -384,14 +384,19 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 需要參數：
 
-| 參數              | 值範例          | 說明                                                         |
-| ----------------- | --------------- | ------------------------------------------------------------ |
-| lc                |                 | 登入碼                                                       |
-| f_strSerialNumber | A01C1PM7A8LE0CN | 15碼序號，序號由運營人員由後端工具- 兌換卡管理<br>發行產生，工具路徑如下：https://admin.gt.web/common/admin/ExCard/index.aspx |
-|                   |                 |                                                              |
-| f_nKind           | 1               | 序號種類，請傳入數字的1                                      |
-| f_strIP           | XXX.XXX.XXX.XXX | 使用者IP(若沒帶入則系統自己取得Request資訊)                  |
-| f_nGameNo         | 1               | 串接端遊戲編號( 1–隨你玩 3012–滿貫大亨)                      |
+| 參數                     | 值範例                                     | 說明                                                         |
+| ------------------------ | ------------------------------------------ | ------------------------------------------------------------ |
+| lc                       |                                            | 登入碼                                                       |
+| f_strSerialNumber        | A01C1PM7A8LE0CN                            | 15碼序號，序號由運營人員由後端工具- 兌換卡管理<br>發行產生，工具路徑如下：https://admin.gt.web/common/admin/ExCard/index.aspx |
+| f_strEncryptSerialNumber | 4PuwwCts0IuZWEqRTHqxsg==                   | 加密過後的序號，透過網頁開啟遊戲APP後取得                    |
+| f_nKind                  | 1                                          | 序號種類，請傳入數字的1                                      |
+| f_strIP                  | XXX.XXX.XXX.XXX                            | 使用者IP(若沒帶入則系統自己取得Request資訊)                  |
+| f_nGameNo                | 1                                          | 串接端遊戲編號( 1–隨你玩 3012–滿貫大亨)                      |
+| f_strDeviceId            | d1cea87a-74ab-4244-b0fa-01e517a74866       | 裝置識別碼(遊戲中帶過來)                                     |
+| f_strCooperateGame       | donut                                      | 合作遊戲id(導流活動用)                                       |
+| f_strCooperateLc         | 09047E7B7F8A807B47A7B4A90827A7E8C7A7B72... | 合作遊戲登入碼(會員沒有串GT的則帶雙方定義的唯一識別值)       |
+| f_nPlatform              | 9                                          | 平台編號(跟儲值中心的平台編號相同，會員沒有串GT的才需要)     |
+| f_strCheckCode           | 3F8BDACF04D16E32E3EE020323AEE993CDED61E5   | 檢核碼(透過平台編號產出的檢核碼，會員沒有串GT的才需要)       |
 
 
 
