@@ -7,9 +7,9 @@
 | --- | --- |--- | ---|
 | **0.5**    | 2010/12/06 | 魏嘉男 | 新建立文件                     |
 | (略) |  |  |  |
-| **1.75.1** | 2023/05/23 | 林子傑 | (1)四.付款方式代碼表新增 AFTEE |
 | **1.76.0** | 2023/07/05 | 林子傑 | (1)四.付款方式代碼表新增 KPAY |
 | **1.77.0** | 2023/10/13 | 林子傑 | (1)四.付款方式代碼表新增 UNIPIN |
+| **1.78.0** | 2023/12/13 | 林子傑 | (1)四.付款方式代碼表新增 街口支付 |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -511,6 +511,7 @@ http://support.towergame.com/?page_id=16420
 | 235 | Gash信用卡 | (一)廠商標準流程 | | | 請參考127-信用卡說明 |
 | 239 | AFTEE | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=28435 |
 | 246 | 馬來 UNIPIN | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=31026 |
+| 268 | 街口支付 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=32095 |
 | 501 | MOL泰國版_12Call卡 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20704 |
 | 502 | MOL泰國版_TrueMoney卡 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20704 |
 | 504 | MOL泰國版_MOLPoints卡 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=20704 |
