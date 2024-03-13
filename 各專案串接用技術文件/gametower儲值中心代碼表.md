@@ -439,22 +439,6 @@
 |HiNet ADSL 輕鬆付|072406|[MyBillingPay交易回應]訂單編號驗證比對錯誤||
 |HiNet ADSL 輕鬆付|072598|HiNet ADSL 輕鬆付伺服器連線失敗，請稍後再試～||
 |HiNet ADSL 輕鬆付|072599|HiNet ADSL 輕鬆付伺服器維護中||
-|Go!Card 儲值卡|091101|GoCard其它錯誤||
-|Go!Card 儲值卡|091106|[GoCard卡號]欄位不得為空||
-|Go!Card 儲值卡|091107|[GoCard資訊]欄位不得為空||
-|Go!Card 儲值卡|091108|[GoCard卡號]解壓縮失敗||
-|Go!Card 儲值卡|091109|[GoCard資訊]解壓縮失敗||
-|Go!Card 儲值卡|091110|[GoCard卡號]欄位長度需為18碼或20碼||
-|Go!Card 儲值卡|091111|[GoCard卡號]欄位資料長度不正確||
-|Go!Card 儲值卡|091120|[GoCard申請交易]失敗||
-|Go!Card 儲值卡|091131|[GoCard提交交易]回傳資訊錯誤||
-|Go!Card 儲值卡|091132|[GoCard提交交易]卡號資訊填寫錯誤或卡號已被使用||
-|Go!Card 儲值卡|091133|[GoCard提交交易]逾時或交易編號不存在||
-|Go!Card 儲值卡|091134|[GoCard提交交易]其它錯誤||
-|Go!Card 儲值卡|091598|GoCard讀取WebService失敗||
-|Go!Card 儲值卡|091601|GoCard其它錯誤||
-|Go!Card 儲值卡|091611|[GoCard]會員資料錯誤||
-|Go!Card 儲值卡|091612|[GoCard]遊戲伺服器連線失敗||
 |香港 - now.com.hk 增值計劃|092101|NOW_POINT其他錯誤||
 |香港 - now.com.hk 增值計劃|092106|[USER_ID]欄位不得為空||
 |香港 - now.com.hk 增值計劃|092110|[USER_ID]其他錯誤||
@@ -1877,22 +1861,6 @@
 |HiNet ADSL 輕鬆付|072406|[MyBillingPay交易回應]訂單編號驗證比對錯誤||
 |HiNet ADSL 輕鬆付|072598|HiNet ADSL 輕鬆付伺服器連線失敗，請稍後再試～||
 |HiNet ADSL 輕鬆付|072599|HiNet ADSL 輕鬆付伺服器維護中||
-|Go!Card 儲值卡|091101|GoCard其它錯誤||
-|Go!Card 儲值卡|091106|[GoCard卡號]欄位不得為空||
-|Go!Card 儲值卡|091107|[GoCard資訊]欄位不得為空||
-|Go!Card 儲值卡|091108|[GoCard卡號]解壓縮失敗||
-|Go!Card 儲值卡|091109|[GoCard資訊]解壓縮失敗||
-|Go!Card 儲值卡|091110|[GoCard卡號]欄位長度需為18碼或20碼||
-|Go!Card 儲值卡|091111|[GoCard卡號]欄位資料長度不正確||
-|Go!Card 儲值卡|091120|[GoCard申請交易]失敗||
-|Go!Card 儲值卡|091131|[GoCard提交交易]回傳資訊錯誤||
-|Go!Card 儲值卡|091132|[GoCard提交交易]卡號資訊填寫錯誤或卡號已被使用||
-|Go!Card 儲值卡|091133|[GoCard提交交易]逾時或交易編號不存在||
-|Go!Card 儲值卡|091134|[GoCard提交交易]其它錯誤||
-|Go!Card 儲值卡|091598|GoCard讀取WebService失敗||
-|Go!Card 儲值卡|091601|GoCard其它錯誤||
-|Go!Card 儲值卡|091611|[GoCard]會員資料錯誤||
-|Go!Card 儲值卡|091612|[GoCard]遊戲伺服器連線失敗||
 |香港 - now.com.hk 增值計劃|092101|NOW_POINT其他錯誤||
 |香港 - now.com.hk 增值計劃|092106|[USER_ID]欄位不得為空||
 |香港 - now.com.hk 增值計劃|092110|[USER_ID]其他錯誤||
