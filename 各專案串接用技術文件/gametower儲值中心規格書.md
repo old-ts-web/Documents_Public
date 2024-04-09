@@ -10,6 +10,7 @@
 | **1.76.0** | 2023/07/05 | 林子傑 | (1)四.付款方式代碼表新增 KPAY |
 | **1.77.0** | 2023/10/13 | 林子傑 | (1)四.付款方式代碼表新增 UNIPIN |
 | **1.78.0** | 2023/12/13 | 林子傑 | (1)四.付款方式代碼表新增 街口支付 |
+| **1.79.0** | 2024/03/13 | 吳志豪 | (1)四.付款方式代碼表刪除 GO!Card 儲值卡 |
 
 ## 一.交易流程種類說明
 ### (一)廠商標準流程
@@ -438,7 +439,6 @@ http://support.towergame.com/?page_id=16420
 | 63 | 台灣大哥大行動輕鬆付 | (一)廠商標準流程 |  | 是 | 見<br/>http://support.towergame.com/?p=11141 |
 | 64 | 亞太電信行動輕鬆付 | (一)廠商標準流程 |  | 是 | 見<br/>http://support.towergame.com/?p=11141 |
 | 72 | HiNet ADSL 輕鬆付 | (一)廠商標準流程 |  | 是 | 見<br/>http://support.towergame.com/?p=11141 |
-| 91 | Go!Card 儲值卡 | (一)廠商標準流程 |  |  | 見<br/>http://support.towergame.com/?p=15690 |
 | 92 | NOW_POINT 增值計畫 | (三)付費平台標準流程 |  |  | 提出交易請求電文連結位置：<br/>測試機：https://bank-twtest.towergame.com/common/receive/NowPoint/AutoMsgClient.aspx<br/>正式機：https://bank.gametower.com.tw/common/receive/NowPoint/AutoMsgClient.aspx<br/>可直接串接的儲值中心：台版儲值中心(※若欲串接的儲值中心不在明細內，則專案串接時程需包含網頁組進行搬移作業的時間) |
 | 104 | 銀聯國際充值 | (一)廠商標準流程 | | | 見<br/>http://support.towergame.com/?p=15729 |
 | 106 | MOL 國際充值 | (一)廠商標準流程 |  |  | 見<br />http://support.towergame.com/?p=20205 |
