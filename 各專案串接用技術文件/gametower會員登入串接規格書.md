@@ -20,6 +20,7 @@
 | **1.1.1** | 2017/12/19 | 吳志豪 | 修改2.6.1與2.6.2新增提供會員『serial_number』欄位資料傳回與修改串接的描述 |
 | **1.2.0** | 2018/10/18 | 魏嘉男 | 所有網址調整成一階層(ex.www.twtest.towergame.com)   |
 | **1.2.1** | 2018/12/21 | 林子傑 | 3.2.1 補上代碼 ln (LINE 登入)   |
+| **1.2.2** | 2024/05/10 | 魏嘉男 | 新增回傳 user_authority 說明 |
 
 ## 1.介紹
 
@@ -72,20 +73,21 @@
 | 參數名稱     | 型態 | 長度   | 必要 | 説明                                                         |
 | ------------ | ---- | ------ | ---- | ------------------------------------------------------------ |
 | access_token | 字串 | 固定32 | 是   | **接收到的User AccessToken**                                 |
-| fields       | 字串 |        | 字串 | 欲取得的使用者資料，以逗號字元區格，有以下項目：<br/>user_id:使用者ID<br/>user_bonus:使用者紅利點數<br/>user_login_token:使用者登入權杖 (LC) |
+| fields       | 字串 |        | 字串 | 欲取得的使用者資料，以逗號字元區格，有以下項目：<br/>user_id:使用者ID<br/>user_bonus:使用者紅利點數<br/>user_login_token:使用者登入權杖 (LC)<br />user_authority:使用者權限List |
 
 2.2.2取得使用者資料API Response(取得使用者資料API回覆請求結果)
 
 | 2.2.2取得使用者資料API Response說明 |
 | ------------------------------------------------------------ |
 | 回傳Content-Type為JSON的請求結果 |
-| 成功範例：<br/>HTTP/1.1 200 OK<br/>Content-Type: application/json;charset=UTF-8<br/>Cache-Control: no-store<br/>Pragma: no-cache<br/><br/>{<br/>	"user_id":"U4W0K1KRSTUXEPFH" ,<br/>	"user_bonus":10000,<br/>	"user_login_token":"010AAFE178DCE0AE78A878E4AA78A87878DD78A8A878A9EBE07878787878AEA8E7"<br/>} |
+| 成功範例：<br/>HTTP/1.1 200 OK<br/>Content-Type: application/json;charset=UTF-8<br/>Cache-Control: no-store<br/>Pragma: no-cache<br/><br/>{<br/>	"user_id":"U4W0K1KRSTUXEPFH" ,<br/>	"user_bonus":10000,<br/>	"user_login_token":"010AAFE178DCE0AE78A878E4AA78A87878DD78A8A878A9EBE07878787878AEA8E7",<br/>"user_authority":["MEMBER.DATA_BROWSE","MEMBER.DATA_EDIT"]<br />} |
 
 | 參數名稱 | 型態 | 長度 | 必要 | 説明 |
 | --- | --- | --- | --- | --- |
 | user_id | 字串 | 固定16 | 否  | **使用者ID (需要求user_id)** |
 | user_bonus| 正整數 |        | 否 | **使用者紅利點數 (需要求user_bonus)**                        |
-| user_login_token | 字串 |        | 否 | **使****用者登入權杖 (LC)**   **(****需要求 user_login_token)** |
+| user_login_token | 字串 |        | 否 | **使**用者登入權杖 (LC)  **(**需要求 user_login_token) |
+| user_authority | 字串List | | 否 | 使用者權限List |
 
 | 失敗範例 |
 | ------------------------------------------------------------ |
