@@ -10,6 +10,7 @@
 | **1.68.1** | 2023/02/09 | 吳志豪 | 修改『34.問題回報滿意度查詢API』修改f_strCheckCode(檢核碼)的描述與更新錯誤代碼<br />修改『35.問題回報滿意度新增API』修改f_strCheckCode(檢核碼)的描述與更新錯誤代碼 |
 | **1.69.0** | 2023/04/24 | 林子傑 | 部分內容改指向資訊站 |
 | **1.70.0** | 2023/05/25 | 吳志豪 | 將LC登入的處理改成使用帶入dlc參數的方式 |
+| **1.71.0** | 2024/04/09 | 魏嘉男 | 修正使用Api站台網址 |
 
 提供各單位串接gametower使用，目前**gametower例行維護時間為3,6,9,12月第四個周三
 09:00\~12:00**，每次維護前一周會寄出維護通知，維護時間相關API皆無法使用，請串接單位注意。
@@ -2346,7 +2347,15 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ## 40.取得儲值品項API
 
-驗證網址：<https://www.gt.web/common/receive/Product/GetProducts.aspx>
+各環境Domain：
+
+​	開發環境：api.gt.web
+
+​	測試環境：api-twtest.towergame.com
+
+​	正式環境：api.gametower.com.tw
+
+驗證網址：<https://api.gt.web/common/receive/Product/GetProducts.aspx>
 
 傳遞參數方式：
 
@@ -2362,7 +2371,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 
 
-取得品項網址範例：https://www.gt.web/common/receive/Product/GetProducts.aspx?q_nGameServerGroupNo=10&q_nPlatformNo=1&q_nTransOptionNo=21&q_strIP={傳入使用者IP
+取得品項網址範例：https://api.gt.web/common/receive/Product/GetProducts.aspx?q_nGameServerGroupNo=10&q_nPlatformNo=1&q_nTransOptionNo=21&q_strIP={傳入使用者IP
 ex.61.219.10.247}&q_nVIPLevel={傳入VIP等級
 ex.3}&q_strAppID=com.igs.big2&q_nMemberNo={傳入會員編號 ex.717248}
 
@@ -2624,7 +2633,15 @@ height="3.990972222222222in"}
 
 ## 47.問卷報名系統-遊戲端詢問問卷API
 
-驗證網址：<http://www.gt.web/common/receive/GoogleForm/check.aspx>
+各環境Domain：
+
+​	開發環境：api.gt.web
+
+​	測試環境：api-twtest.towergame.com
+
+​	正式環境：api.gametower.com.tw
+
+驗證網址：<http://api.gt.web/common/receive/GoogleForm/check.aspx>
 
 相關資料表：
 
