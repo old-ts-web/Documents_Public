@@ -250,10 +250,10 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 寄送簡訊成功
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<ROOT>  
-	<RETURN_CODE>0</RETURN_CODE>  
-	<RETURN_MESSAGE>驗證簡訊發送成功。</RETURN_MESSAGE>  
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<RETURN_CODE>0</RETURN_CODE>
+	<RETURN_MESSAGE>驗證簡訊發送成功。</RETURN_MESSAGE>
 </ROOT>
 ```
 
@@ -266,20 +266,20 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 寄送簡訊失敗
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<ROOT>  
-	<RETURN_CODE>-1</RETURN_CODE>  
-	<RETURN_MESSAGE>未選擇處理模式。</RETURN_MESSAGE>  
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<RETURN_CODE>-1</RETURN_CODE>
+	<RETURN_MESSAGE>未選擇處理模式。</RETURN_MESSAGE>
 </ROOT>
 ```
 
 回填驗證碼成功
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<ROOT>  
-	<RETURN_CODE>0</RETURN_CODE>  
-	<RETURN_MESSAGE>驗證成功。</RETURN_MESSAGE>  
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<RETURN_CODE>0</RETURN_CODE>
+	<RETURN_MESSAGE>驗證成功。</RETURN_MESSAGE>
 </ROOT>
 
 ```
@@ -287,10 +287,10 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 回填驗證碼失敗
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<ROOT>  
-	<RETURN_CODE>-9</RETURN_CODE>  
-	<RETURN_MESSAGE>輸入的驗證碼有誤，請重新輸入。</RETURN_MESSAGE>  
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<RETURN_CODE>-9</RETURN_CODE>
+	<RETURN_MESSAGE>輸入的驗證碼有誤，請重新輸入。</RETURN_MESSAGE>
 </ROOT>
 
 ```
@@ -529,7 +529,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -------------- | ---- |
 | HTTP Method    | GET  |
 
-  
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -653,7 +653,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 回傳值：
 
-``` 
+```
 序號 或 錯誤資訊( err:XXXXX)
 ```
 
@@ -768,7 +768,7 @@ Response.Write XML 格式於畫面上
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Root 
+<Root
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="gt2.xsd">
     <AD>
         <URL>
@@ -797,7 +797,7 @@ B. 錯誤-未帶入AreaID參數
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Root 
+<Root
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="gt2.xsd">
 [AreaID]參數輸入錯誤!!
 </Root>
@@ -807,7 +807,7 @@ C. 該區域後端廣告設定筆數為0
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Root 
+<Root
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="gt2.xsd">
    <AD>
         <URL>
@@ -871,7 +871,7 @@ C. 該區域後端廣告設定筆數為0
 		"ACTION_START_DATETIME":"",
 		"ACTION_END_DATETIME":""
 	}]
-} 
+}
 ```
 
 
@@ -942,7 +942,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -12  | 查無會員資料                                            |
 | -99  | 其他錯誤                                                |
 
- 
+
 
 回傳範例：
 
@@ -973,7 +973,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | HTTP Method    | POST                  |
 | Content Type   | x-www-form-urlencoded |
 
- 
+
 
 串接單位是否需要允許個資同意機制：**是**
 
@@ -1226,7 +1226,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -------- | ------ | -------- | ----------- |
 | id       | String | 是       | 機台群組 ID |
 
-  
+
 
 輸出格式：
 
@@ -1366,7 +1366,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -------- | ---- | -------- | --------------------------------- |
 | memberno | int  | 是       | 會員編號，非 gametower 會員填入 0 |
 
-  
+
 
 輸出格式：
 
@@ -1422,7 +1422,7 @@ http://bank.gt.web/common/receive/service/GetCurrencyRate.aspx?id=幣別代碼A,
 | ID       | String | 是       | 欲查詢之幣別代碼(e.g USD、CNY...etc) |
 | TYPE     | string | 否       | 回傳格式 url / xml/ json             |
 
- 
+
 
 回傳範例：
 
@@ -1498,7 +1498,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -------------------- | ------- | -------- | ------------- |
 | CheckVIPMethodResult | Boolean | 是       | 是否為遊戲VIP |
 
-  
+
 
 傳送範例：
 
@@ -1520,12 +1520,12 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope 
-    xmlns:soap="http://www.w3.org/2003/05/soap-envelope" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<soap:Envelope
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <soap:Body>
-        <CheckVIPMethodResponse 
+        <CheckVIPMethodResponse
             xmlns="http://tempuri.org/">
             <CheckVIPMethodResult>true</CheckVIPMethodResult>
         </CheckVIPMethodResponse>
@@ -1565,7 +1565,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | {facebook_app_id}                              | String | 是       | facebook 應用程式 id，開發、測試、正式環境皆不同 |
 | {url_encode(url_encode(研發端接收結果的網址))} | String | 是       | 最後會後導向的網址，做兩次 url_encode            |
 
- 
+
 
 回傳資料：
 
@@ -1573,7 +1573,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -------- | ------ | -------- | ------- |
 | lc       | string | 是       | lc 字串 |
 
- 
+
 
 傳送範例：
 
@@ -1635,50 +1635,50 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | RETURN_MESSAGE       | string  | 是       | 回應訊息，發生錯誤時會有錯誤訊息             |
 | IP_IN_RESTRAIN_CLASS | boolean | 是       | IP 是否在指定的類別中？true – 是，false – 否 |
 
-  
+
 
 回傳範例：
 
 成功 -- XML
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<ROOT>  
-	<RETURN_CODE>0</RETURN_CODE>  
-	<RETURN_MESSAGE></RETURN_MESSAGE>  
-	<IP_IN_RESTRAIN_CLASS>true</IP_IN_RESTRAIN_CLASS>  
-</ROOT> 
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<RETURN_CODE>0</RETURN_CODE>
+	<RETURN_MESSAGE></RETURN_MESSAGE>
+	<IP_IN_RESTRAIN_CLASS>true</IP_IN_RESTRAIN_CLASS>
+</ROOT>
 ```
 
 成功 -- JSON
 
 ```json
-{  
-	"RETURN_CODE":0,  
-	"RETURN_MESSAGE":"",  
-	"IP_IN_RESTRAIN_CLASS":true  
-} 
+{
+	"RETURN_CODE":0,
+	"RETURN_MESSAGE":"",
+	"IP_IN_RESTRAIN_CLASS":true
+}
 ```
 
 發生錯誤 - XML
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<ROOT>  
-	<RETURN_CODE>-1</RETURN_CODE>  
-	<RETURN_MESSAGE>未傳入 q_strClass 參數。</RETURN_MESSAGE>  
-	<IP_IN_RESTRAIN_CLASS>false</IP_IN_RESTRAIN_CLASS>  
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	<RETURN_CODE>-1</RETURN_CODE>
+	<RETURN_MESSAGE>未傳入 q_strClass 參數。</RETURN_MESSAGE>
+	<IP_IN_RESTRAIN_CLASS>false</IP_IN_RESTRAIN_CLASS>
 </ROOT>
 ```
 
 發生錯誤 -- JSON
 
 ```json
-{  
-	"RETURN_CODE":-1,  
-	"RETURN_MESSAGE":"æœªå‚³å…¥ q_strIP åƒæ•¸ã€‚",  
-	"IP_IN_RESTRAIN_CLASS":false  
-} 
+{
+	"RETURN_CODE":-1,
+	"RETURN_MESSAGE":"æœªå‚³å…¥ q_strIP åƒæ•¸ã€‚",
+	"IP_IN_RESTRAIN_CLASS":false
+}
 ```
 
 
@@ -1759,7 +1759,7 @@ Result object
 
 回傳格式：
 
-成功範例  
+成功範例
 
 ```json
 {
@@ -1930,7 +1930,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | f_strInputPhoneNumber | string | 是       | 收訊端手機號碼，例如 0987654321 或 886987654321              |
 | f_strSMSContent       | string | 是       | 簡訊內文，限70個字元以內(不區分中英文)                       |
 
-  
+
 
 回傳參數說明：
 
@@ -1984,7 +1984,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | HTTP Method    | POST                  |
 | Content Type   | x-www-form-urlencoded |
 
- 
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -2283,7 +2283,7 @@ height="2.4611111111111112in"}
 | -------------- | ---- |
 | HTTP Method    | GET  |
 
-  
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -2327,7 +2327,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
  "RESULT": {
 	"IS_BUY_THIRD_PARTY": true,
 	"IS_OVER_GOOGLE_PLAY_LIMIT": true
-	"MONTH_TRANS_VALUE": 1999,			
+	"MONTH_TRANS_VALUE": 1999,
 	"SET_LIMIT_VALUE": 25000
  }
 }
@@ -2363,7 +2363,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | -------------- | ---------------------------------------- |
 | HTTP Method    | GET**(q_strPrizeIDs可支援POST方式傳入)** |
 
- 
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -2496,7 +2496,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | f_strReceiver | string | 昰       | 收件者 (e.g. damonhou<damonhou@igs.com.tw> 或 damonhou@igs.com.tw)，多組信箱請用『;』區隔 |
 | f_strContent  | string | 昰       | 信件內容(支援HTML)                                           |
 
- 
+
 
 回傳參數說明：
 
@@ -2574,7 +2574,7 @@ http://support.towergame.com/?p=24458
 | -------------- | ---- |
 | HTTP Method    | GET  |
 
- 
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -2608,7 +2608,7 @@ height="2.2694444444444444in"}
 | -------------- | ---- |
 | HTTP Method    | GET  |
 
- 
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -2660,7 +2660,7 @@ height="3.2in"}
 | -------------- | ---- |
 | HTTP Method    | GET  |
 
-  
+
 
 串接單位是否需要允許個資同意機制：**是**
 
@@ -2675,7 +2675,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 | f_nGameNo   | int  | 是       | 遊戲編號 |
 | f_nMemberNo | int  | 是       | 會員編號 |
 
- 
+
 
 回傳格式：
 
@@ -2741,7 +2741,7 @@ height="2.417361111111111in"}
 | HTTP Method    | POST                  |
 | Content Type   | x-www-form-urlencoded |
 
-  
+
 
 串接單位是否需要允許個資同意機制：**是**
 
@@ -2801,7 +2801,7 @@ data =
 | HTTP Method    | POST                  |
 | Content Type   | x-www-form-urlencoded |
 
- 
+
 
 串接單位是否需要允許個資同意機制：**否**
 
@@ -2826,7 +2826,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 成功範例
 
 ```json
-{ 
+{
 "ObjectNameList":[
 	"sales/salesreport_201704.zip",
 	"sales/salesreport_201705.zip",
@@ -2845,7 +2845,7 @@ P.S：若為『是』的話，請確認頁面上有玩家同意個資機制(請�
 
 回傳格式(DOWNLOAD模式)：
 
-成功範例(application/octet-stream直接輸出檔案) 
+成功範例(application/octet-stream直接輸出檔案)
 
 ```
 檔案的MemoryStream
@@ -2957,7 +2957,7 @@ v2.0：輸入門號 → 顯示驗證碼給玩家 → 玩家記好後，發起來
 | HTTP Method    | POST                  |
 | Content Type   | x-www-form-urlencoded |
 
-  
+
 
 串接單位是否需要允許個資同意機制：**是**
 
@@ -3243,7 +3243,7 @@ or
 
 回傳格式：
 
-成功範例 
+成功範例
 
 ```json
 {"RETURN_CODE":"0"," RETURN_MESSAGE":"發送成功"}
@@ -3255,7 +3255,7 @@ or
 {"RETURN_CODE":"-1","RETURN_MESSAGE":"解析傳入參數後無任何接收者"}
 ```
 
-  
+
 
 錯誤代碼表：
 
@@ -3316,7 +3316,7 @@ http://support.towergame.com/?p=23962
 >
 > 傳入會員資訊(門號、FB ID...)，供其他遊戲推廣使用
 >(廣告簡訊、FB廣告受眾...)
-> 
+>
 >例如：傳入滿貫流失會員，作為金好運廣告簡訊發送名單
 
 
@@ -3328,7 +3328,7 @@ http://support.towergame.com/?p=23962
 | HTTP Method    | POST                  |
 | Content Type   | x-www-form-urlencoded |
 
-  
+
 
 需要參數：
 
@@ -3458,7 +3458,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 }
 ```
 
-失敗範例 
+失敗範例
 
 ```json
 {
@@ -3494,7 +3494,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 | -------------- | ---- |
 | HTTP Method    | GET  |
 
- 
+
 
 需要參數：
 
@@ -3524,7 +3524,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 {
 "RETURN_CODE": 0,
 "RETURN_MESSAGE": "成功",
-"RESULT": 
+"RESULT":
  {
   "IS_CAN_CONSUME": false,
   "ALERT_MESSAGE": "您本月的儲值額度上限為 XXXXX，本月份您已累計儲值達 XXXXX，加上本次交易額 XXXXXX已超過儲值上限，請重新選擇您的儲值或下月份再行儲值。"
@@ -3534,7 +3534,7 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 {
 "RETURN_CODE": 0,
 "RETURN_MESSAGE": "成功",
-"RESULT": 
+"RESULT":
  {
   "IS_CAN_CONSUME": true,
   "ALERT_MESSAGE": null
@@ -4014,17 +4014,17 @@ check_code範例程式如下(請注意實際呼叫API的內容為Json格式)
 public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
 {
      StringBuilder strValue      = new StringBuilder() ;
-    
+
      // 依照 Key 排序，將所有 Value 相加 (排除 CheckCode 參數)
      foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
      {
      	if (!strKey.Equals("CheckCode",StringComparison.OrdinalIgnoreCase))
               strValue.Append(_csDataColl[strKey]) ;
      }
-    
+
      // 最後加入私Key
      strValue.Append(_strPrivateKey) ;
-    
+
 	 return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA512") ;
 }
 
@@ -4125,17 +4125,17 @@ check_code範例程式如下(請注意實際呼叫API的內容為Json格式)
 public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
 {
      StringBuilder strValue      = new StringBuilder() ;
-    
+
      // 依照 Key 排序，將所有 Value 相加 (排除 CheckCode 參數)
      foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
      {
      	if (!strKey.Equals("CheckCode",StringComparison.OrdinalIgnoreCase))
               strValue.Append(_csDataColl[strKey]) ;
      }
-    
+
      // 最後加入私Key
      strValue.Append(_strPrivateKey) ;
-    
+
 	 return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA1") ;
 }
 
@@ -4160,4 +4160,104 @@ public static string GetCheckCode(NameValueCollection _csDataColl,string _strPri
 {"RETURN_CODE":-21,"RETURN_MESSAGE":"「新密碼」欄位與「密碼再確認」欄位輸入內容不同，請重新輸入。"}
 ```
 
-## 
+##
+## 67.修改密碼API
+
+各環境Domain：
+
+​	開發環境：api.gt.web
+
+​	測試環境：api-twtest.towergame.com
+
+​	正式環境：api.gametower.com.tw
+
+驗證網址：
+
+​	https://{api domain}/common/receive/Storedprocedure/PRIZE_PrizeWinner_AddRecord.aspx
+
+
+傳遞參數方式：
+
+| Request Header |      |
+| -------------- | ---- |
+| HTTP Method    | POST |
+
+需要參數：
+
+| 參數名稱             | 型別   | 長度 | 是否必填                | 說明                                          |
+| -------------------- | ------ | ---- | ----------------------- | ------------------------------------------ |
+| f_nPlatformNo        | string |      | 是                      | 廠商編號                                     |
+| f_nMemberNo          | string |      | 是                      | 會員編號                                     |
+| f_strPrizeId			   | string |      | 是                      | 獎項識別ID                                   |
+| f_nPrizeAmount 		   | string |      | 是                      | 獲獎數量                                     |
+| f_dtDrawDeadline		 | String |      | 是                      | 領取到期日                                   |
+| f_strDescription 		 | String |      | 是                      | 得獎說明                                     |
+| f_nModuleCodeNo 		 | String |      | 是                      | 單元代碼                                     |
+| f_strActionId 			 | String |      | 是                      | 活動代碼(實體領獎活動起案的識別ID)             |
+| f_strCheckCode			 | String |      | 是                      | 驗證碼                                       |
+
+
+check_code範例程式如下(**以下依照 Key 排序為不區分大小寫，若使用的程式語言是會區分的話，建議都轉成大寫或小寫後再做排序**)
+
+```c#
+public static string GetCheckCode(NameValueCollection _csDataColl,string _strPrivateKey)
+{
+     StringBuilder strValue      = new StringBuilder() ;
+
+     // 依照 Key 排序，將所有 Value 相加 (排除 CHECK_CODE 參數)
+     foreach(string strKey in _csDataColl.AllKeys.OrderBy(o => o))
+     {
+         if (!strKey.Equals("CHECK_CODE",StringComparison.OrdinalIgnoreCase))
+              strValue.Append(_csDataColl[strKey]) ;
+     }
+     // 最後加入私Key
+     strValue.Append(_strPrivateKey) ;
+
+     return FormsAuthentication.HashPasswordForStoringInConfigFile(strValue.ToString(),"SHA1") ;
+}
+
+```
+
+回傳結果：
+
+| 參數           | 說明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| RETURN_CODE    | 等於 0 時為成功，其他為失敗                                  |
+| RETURN_MESSAGE | 回傳結果訊息(若RETURN_CODE = 0 則回傳 "成功"，反之則回傳提供適合前端使用者觀看的錯誤訊息) |
+
+錯誤代碼：(相關錯誤代碼除了成功以外皆不適合給前端玩家看，請研發再轉成適合給前端玩家看的資訊)
+0：		成功
+-2：		獎品數量未大於 0
+-3：		單元代碼小於 0
+-5：		說明未填入值
+-6：		獎品不存在
+-9：		作業失敗
+-10：	領取到期日格式錯誤
+-993：	未知錯誤
+-994：	未收到預存回傳值
+-995：	發生非預期錯誤
+-996：	廠商編號不存在
+-997：	DB連線異常
+-999：	CHECK_CODE檢查不符
+
+成功範例：
+
+```json
+{
+  	"RETURN_CODE": 0,
+ 	"RETURN_MESSAGE":"成功",
+ 	"RESULT":{"PrizeWinnerNo":12345678}
+}
+```
+
+失敗範例：
+
+```json
+{
+  	"RETURN_CODE": 2,
+ 	"RETURN_MESSAGE":"獎品數量未大於 0",
+ 	"RESULT":null
+}
+```
+
+##
